@@ -2,7 +2,7 @@
 
 ## Git & Github
 ### Git
-** Command Line **
+**Command Line**
 - `git init` initializes git functionality for the current directory
 - `git status` lists the git info for the files in the directory
 - `git add` when followed by files stages those files to be committed
