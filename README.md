@@ -33,20 +33,29 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login over HTTPS
+- Link profiles with partner
+- Instant message with partner
+- Shared timeline with ability to add messages from the chat and longer custom entries
+- Persisent storage of messages and timeline and functionality to scroll through both
+- Account page with user info and options/settings
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Used to structure the application. Four HTML pages including a sign-in, chat, timeline, and account page
+- **CSS** - Used for application styling that looks clean and simple on various screen sizes. Thoughtful spacing and sizing of elements with a unified color scheme
+- **React** - Used for login, switching between pages, displaying chats, handling scrolling, making components, and calling backend services to send and load messages
+- **Service** - Backend service with the following endpoints:
+ - login authentication
+ - account linking
+ - sending messages
+ - loading message history
+ - updating timeline
+ - loading timeline
+- **DB/Login** - Store users, messages, and timeline in database with their associated metadata. Store account credentials as well as which users are linked, only allowing for each user to be linked to one other user.
+- **WebSocket** - Delivering messages to recipient and posting updates to the timeline
 
 ## 🚀 AWS deliverable
 
