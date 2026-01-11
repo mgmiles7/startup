@@ -1,12 +1,22 @@
 # CS 260 Notes
 
-[My startup - Simon](https://simon.cs260.click)
+## Git & Github
+### Git
+** Command Line **
+- `git init` initializes git functionality for the current directory
+- `git status` lists the git info for the files in the directory
+- `git add` when followed by files stages those files to be committed
+      - `git add .` adds everything in the current directory
+- `git commit -m` commits the staged files to the branch with a commit message following in " "
+      - `git commit -am` adds everything and commits them
+- `git diff HEAD HEAD~` compares the current commit to earlier commits
 
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
+- [MD Cheatsheet](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 
 ## AWS
 
