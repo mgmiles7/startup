@@ -20,8 +20,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Design
 
-![Login and Timeline Screens](Us_Mockups1.jpg)
-![Chat Screen](Us_Mockups2.jpg)
+<img src="Us_Mockups1.jpg" width="50%" height="auto" />
+
+<img src="Us_Mockups2.jpg" width="50%" height="auto" />
 
 ### Key features
 
