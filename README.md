@@ -19,10 +19,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
  The substance of life is connecting with people. With so much of our connection happening online on an increasing number of platforms it's easy for those moments of connection to get lost in the shuffle, or stuck behind ten minutes of scrolling to find that one message. _Us_ redefines that experience with the most important person in your life, your partner. _Us_ provides the perfect place to connect with your special someone, away from the jumble of messages and notifications in other apps to focus only on them. When you get a message that melts your heart or makes your laugh out loud, quickly save it to the built-in timeline, along with your favorite memories and moments so that you can always remember the things that made you and them, _Us_.
 
 ### Design
-
-<img src="Us_Mockups1.jpg" width="50%" height="auto" />
-
-<img src="Us_Mockups2.jpg" width="50%" height="auto" />
+<img src="Us_Mockups1.jpg" width="75%" style="float: left; margin: 0px; display: block" />
+<img src="Us_Mockups2.jpg" width="25%"  style="float: left; margin-bottom: 100px; display: block" />
 
 ### Key features
 
@@ -41,12 +39,12 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Used for application styling that looks clean and simple on various screen sizes. Thoughtful spacing and sizing of elements with a unified color scheme
 - **React** - Used for login, switching between pages, displaying chats, handling scrolling, making components, and calling backend services to send and load messages
 - **Service** - Backend service with the following endpoints:
- - login authentication
- - account linking
- - sending messages
- - loading message history
- - updating timeline
- - loading timeline
+    - login authentication
+    - account linking
+    - sending messages
+    - loading message history
+    - updating timeline
+    - loading timeline
 - **DB/Login** - Store users, messages, and timeline in database with their associated metadata. Store account credentials as well as which users are linked, only allowing for each user to be linked to one other user.
 - **WebSocket** - Delivering messages to recipient and posting updates to the timeline
 
