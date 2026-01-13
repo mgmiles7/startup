@@ -19,8 +19,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
  The substance of life is connecting with people. With so much of our connection happening online on an increasing number of platforms it's easy for those moments of connection to get lost in the shuffle, or stuck behind ten minutes of scrolling to find that one message. _Us_ redefines that experience with the most important person in your life, your partner. _Us_ provides the perfect place to connect with your special someone, away from the jumble of messages and notifications in other apps to focus only on them. When you get a message that melts your heart or makes your laugh out loud, quickly save it to the built-in timeline, along with your favorite memories and moments so that you can always remember the things that made you and them, _Us_.
 
 ### Design
-<img src="Us_Mockups1.jpg" width="75%" style="float: left; margin: 0px; display: block" />
-<img src="Us_Mockups2.jpg" width="25%"  style="float: left; margin-bottom: 100px; display: block" />
+<div style = "display: flex; flex-direction: row">
+<img src="Us_Mockups1.jpg" width="75%" style="float: left; margin: 0px" />
+<img src="Us_Mockups2.jpg" width="25%"  style="float: left; margin: 0px" />
+</div>
 
 ### Key features
 
