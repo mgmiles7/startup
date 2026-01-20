@@ -20,8 +20,9 @@
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+I learned a lot about AWS and how the internet works, communicating through different clients and servers. I was able to set up a web server through AWS EC2 service. I learned how IP addresses are used to identify computers and how the internet serves to dynamically connect those computers. I learned how domain names were tied to IP addresses to make it easier for humans to interact with the internet. I learned how to create an elastic IP address so that my IP address will remain constant even when I restart my server. I also learned about web certificates are issued and are part of the HTTPS protocol
+
+I initially had trouble connecting to my server, but then I realized that I was trying to connect over HTTPS when it hadn't been set up yet
 
 ## Caddy
 
