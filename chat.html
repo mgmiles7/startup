@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat</title>
+        <link rel="icon" href="fav.ico" />
+    </head>
+    <body style="display: grid; flex-direction: column;">
+        <header style="display: flex; flex-direction: row; justify-content: flex-start;">
+            <h3>Username</h3>        
+        </header>
+        <main style="display: flex; flex-direction: column; height: 100%;">
+            <ul style="display: flex; flex-direction: column; justify-content: flex-start; flex: 1; overflow-y: auto; list-style: none; padding: 0; margin: 0;">
+                <li style="align-self: flex-start; background: #dad3da;">Hey</li>
+                <li style="align-self: flex-end; background: #bf9dbf;">How are you?</li>
+                <li style="align-self: flex-start; background: #dad3da;">doing great! did you see the new trailer</li>
+                <li style="align-self: flex-end; background: #bf9dbf;">no net yet</li>
+                <li style="align-self: flex-start; background: #dad3da;">Hey</li>
+                <li style="align-self: flex-end; background: #bf9dbf;">How are you?</li>
+                <li style="align-self: flex-start; background: #dad3da;">doing great! did you see the new trailer</li>
+                <li style="align-self: flex-end; background: #bf9dbf;">no net yet</li>
+            </ul>
+            <div style="display: flex; flex-direction: row; align-self: center; justify-content: flex-start;">
+            <form method="post" action="send_message">
+                    <input type="text" placeholder="message">
+                    <button type="submit">Send</button>
+            </form>
+            </div>
+        </main>
+        <footer>
+            <nav>
+                <hr>
+                <ul>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="profil.html">Profile</a></li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
+</html>
