@@ -62,15 +62,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - Made 4 HTML pages
+- [x] **Proper HTML element usage** - Used correct semantic structure in each page
+- [x] **Links** - Made links between all of the pages
+- [x] **Text** - Added filler text for places where text from the database will come
+- [x] **3rd party API placeholder** - Made a placeholder button for the bored API call on the profile page
+- [x] **Images** - Added in an app logo on the main and profile pages
+- [x] **Login placeholder** - On the main page made a spot to sign in as well as create an account
+- [x] **DB data placeholder** - Database will display timeline as well as messages
+- [x] **WebSocket placeholder** - Websockets will be used for messages and updating timeline
 
 ## 🚀 CSS deliverable
 
