@@ -30,9 +30,9 @@ No problems worked just like it said in the [instruction](https://github.com/web
 
 ## HTML
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+I learned a little bit about HTML but honestly a lot more about basic CSS as I was creating the deliverable. Most of what I explored came from understanding how flex and grid containers worked. I ended up going with flexbox for most of the pages. With the flexbox I also added the ability for certain elements, like the messages and the timeline to scroll, without the rest of the page scrolling as well. I learned about how flexboxes will try to fill their space unless you tell them not too and how grid can be useful for setting up a webpages overall structure. 
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+The actual HTML wasn't very difficult as I had used HTML a fair bit before. Just made sure that I used all the semantic elements correctly to give the page good structure. 
 
 ## CSS
 
