@@ -27,7 +27,7 @@ main {
     align-items: stretch;
 }
 
-h3 {
+h3, h2 {
     font-family: 'Lora';
     align-self: center;
     padding-top: 5px;
