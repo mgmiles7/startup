@@ -15,13 +15,18 @@
     </head>
     <body>
         <header>
-            <nav>
-                <ul>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                </ul>
+            <nav class="navbar navbar-expand fixed-top bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Us</a>
+                    <div class="navbar-nav">
+                        <a class="nav-link active" href="chat.html">Chat</a>
+                        <a class="nav-link" href = "timeline.html">Timeline</a>
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </div>
+                </div>
             </nav>
         </header>
+    
         <main>
             <h3>Rebecca</h3>       
             <ul class = "messages">
@@ -72,15 +77,22 @@
                     </div>
                     <span class="timestamp"> 8:09 AM</span>
             </ul>
-            <div style="display: flex; flex-direction: row; align-self: center; justify-content: flex-start;">
+            
             <form method="post" action="send_message">
-                    <input type="text" placeholder="message">
-                    <button type="submit">Send</button>
+                <div style="display: flex; flex-direction: row; align-self: center; justify-content: flex-start;">
+                <div style="flex: 1 1 auto;" class="input-group"> 
+                <input type="text" class="form-control" placeholder="message">
+                </div>
+                <div>
+                <button type="submit" class="btn btn-primary" style="margin-left: 5px;">Send</button>
+                </div>
             </form>
             </div>
         </main>
-        <footer>
-            
+        <footer class="bg-light fixed-bottom" style="height: 40px; display: flex; flex-direction: row; justify-content: flex-end;">
+            <div style="padding-top: 5px; padding-right: 8px"> 
+              <p>Morgan Miles | <a href="https://github.com/mgmiles7/startup" style="color: #bf9dbf; text-decoration: none;" >GitHub</a> </p>
+            </div>
         </footer>
     </body>
 </html>

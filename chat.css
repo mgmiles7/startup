@@ -1,15 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
 body {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    margin: 0;
+    padding: 56px;
 }
 
 header {
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     flex: 0 0 auto;
+}
+
+.navbar-brand {
+    font-family: 'Lora';
 }
 
 main {
@@ -17,7 +24,12 @@ main {
     flex-direction: column;
     flex: 1;
     min-height: 0;
-    align-items: center;
+    align-items: stretch;
+}
+
+h3 {
+    font-family: 'Lora';
+    align-self: center;
 }
 
 .messages {
@@ -33,13 +45,14 @@ main {
 .message-received {
     align-self: flex-start;
     margin-bottom: 5px;
-    
+    margin-left: 5px;
 }
 
 .message-sent {
     align-self: flex-end;
     margin-bottom: 5px;
     text-align: right;
+    margin-right: 5px;
 }
 
 .bubble {
@@ -66,4 +79,11 @@ main {
     font-style: italic;
     font-size: .75em;
     color: gray;
+}
+
+.btn.btn-primary {
+    /* background-color: #67d8e7;
+    border-color: #67dae7; */
+    background-color: #596d73;
+    border-color: #596d73;
 }
