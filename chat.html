@@ -5,21 +5,72 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Chat</title>
         <link rel="icon" href="fav.ico" />
+        <link 
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
+            rel="stylesheet" 
+            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="chat.css"/>
     </head>
-    <body style="display: flex; flex-direction: column; height: 100vh; overflow: hidden;">
-        <header style="display: flex; flex-direction: row; justify-content: flex-start;">
-            <h3>Username</h3>        
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                </ul>
+            </nav>
         </header>
-        <main style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
-            <ul style="display: flex; flex-direction: column; justify-content: flex-start; flex: 1; overflow-y: auto; list-style: none; padding: 0; margin: 0;">
-                <li style="align-self: flex-start; background: #dad3da;">Hey</li>
-                <li style="align-self: flex-end; background: #bf9dbf;">How are you?</li>
-                <li style="align-self: flex-start; background: #dad3da;">doing great! did you see the new trailer</li>
-                <li style="align-self: flex-end; background: #bf9dbf;">no net yet</li>
-                <li style="align-self: flex-start; background: #dad3da;">Hey</li>
-                <li style="align-self: flex-end; background: #bf9dbf;">How are you?</li>
-                <li style="align-self: flex-start; background: #dad3da;">doing great! did you see the new trailer</li>
-                <li style="align-self: flex-end; background: #bf9dbf;">no net yet</li>
+        <main>
+            <h3>Rebecca</h3>       
+            <ul class = "messages">
+                <li class = "message-received message">
+                    <div class="bubble">
+                        Hey
+                    </div>
+                    <span class="timestamp">12:14 AM</span>
+                </li>
+                <li class = "message-sent message">
+                    <div class="bubble">
+                        How are you?
+                    </div>
+                    <span class="timestamp"> 1:10 AM</span>
+                </li>
+                <li class = "message-received message" ">
+                    <div class="bubble">
+                        doing great! did you see the new trailer
+                    </div>
+                    <span class="timestamp">8:05 AM</span>
+                </li>
+                <li class = "message-sent message">
+                    <div class="bubble">
+                        no net yet
+                    </div>
+                    <span class="timestamp"> 8:09 AM</span>
+                <li class = "message-received message">
+                    <div class="bubble">
+                        Hey
+                    </div>
+                    <span class="timestamp">12:14 AM</span>
+                </li>
+                <li class = "message-sent message">
+                    <div class="bubble">
+                        How are you?
+                    </div>
+                    <span class="timestamp"> 1:10 AM</span>
+                </li>
+                <li class = "message-received message" ">
+                    <div class="bubble">
+                        doing great! did you see the new trailer
+                    </div>
+                    <span class="timestamp">8:05 AM</span>
+                </li>
+                <li class = "message-sent message">
+                    <div class="bubble">
+                        no net yet
+                    </div>
+                    <span class="timestamp"> 8:09 AM</span>
             </ul>
             <div style="display: flex; flex-direction: row; align-self: center; justify-content: flex-start;">
             <form method="post" action="send_message">
@@ -29,13 +80,7 @@
             </div>
         </main>
         <footer>
-            <nav>
-                <hr>
-                <ul>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                </ul>
-            </nav>
+            
         </footer>
     </body>
 </html>

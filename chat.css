@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex: 0 0 auto;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    align-items: center;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.message-received {
+    align-self: flex-start;
+    margin-bottom: 5px;
+    
+}
+
+.message-sent {
+    align-self: flex-end;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.bubble {
+  padding: 0.6rem 0.9rem;
+  border-radius: 1.1rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+.message-sent .bubble {
+  background: #bf9dbf;
+  color: #003b40;
+  border-bottom-right-radius: 0.25rem;
+}
+
+.message-received .bubble {
+  background: #dad3da;
+  color: #333;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.timestamp {
+    align-self: flex-end;
+    font-style: italic;
+    font-size: .75em;
+    color: gray;
+}
