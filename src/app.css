@@ -59,7 +59,12 @@ form {
 .btn.btn-primary {
     background-color: #67d8e7;
     border-color: #67dae7;
+    margin-right: 5px;
 }
 
+p {
+    color: rgb(232, 106, 127);
+    text-decoration: none;
+}
 
 
