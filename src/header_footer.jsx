@@ -8,16 +8,15 @@ import { Profile } from './profile/profile';
 
 export function Layout() {
   return (
-    <BrowserRouter>
         <div className = "body">
             <header>
                 <nav className="navbar navbar-expand fixed-top bg-light">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="#">Us</a>
                         <div className="navbar-nav">
-                            <NavLink className="nav-link" to='chat'>Chat</NavLink>
-                            <NavLink className="nav-link" to='timeline'>Timeline</NavLink>
-                            <NavLink className="nav-link" to='profile'>Profile</NavLink>
+                            <NavLink className="nav-link" to='Chat'>Chat</NavLink>
+                            <NavLink className="nav-link" to='Timeline'>Timeline</NavLink>
+                            <NavLink className="nav-link" to='Profile'>Profile</NavLink>
                         </div>
                     </div>
                 </nav>
@@ -34,7 +33,6 @@ export function Layout() {
                 </div>
             </footer>
         </div>
-    </BrowserRouter>
   );
 }
 
