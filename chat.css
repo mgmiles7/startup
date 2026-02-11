@@ -93,3 +93,20 @@ h3, h2 {
     background-color: #596d73;
     border-color: #596d73;
 }
+
+footer {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+footer > div {
+    padding-top: 5px;
+    padding-right: 8px;
+}
+
+p {
+    color: #bf9dbf;
+    text-decoration: none;
+}
