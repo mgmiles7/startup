@@ -2,11 +2,11 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
-import { chat } from './chat/chat';
-import { timeline } from './timeline/timeline';
-import { profile } from './profile/profile';
+import { Chat } from './chat/chat';
+import { Timeline } from './timeline/timeline';
+import { Profile } from './profile/profile';
 
-export default function App() {
+export function Layout() {
   return (
     <BrowserRouter>
         <div className = "body">
@@ -23,9 +23,9 @@ export default function App() {
                 </nav>
             </header>
             <Routes>
-                <Route path='/' element={<chat />} exact />
-                <Route path = '/timeline' element={<timeline />} />
-                <Route path = 'profile' element={<profile />} />
+                <Route path='/' element={<Chat />} exact />
+                <Route path = '/timeline' element={<Timeline />} />
+                <Route path = 'profile' element={<Profile />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
             <footer className="bg-light fixed-bottom">

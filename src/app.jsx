@@ -1,41 +1,19 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Layout } from './header_footer'
+import { Login } from './login/login'
 
 export default function App() {
-    const navigate = useNavigate();
-    function handleSubmit(e){
-        e.preventDefault();
-        navigate("/header_footer");
-    }
 
-    return (
+    return ( 
      <div className = "body">
-        <header>
-            <img src="/logo.png" alt="Us logo" id="logo"/>
-        </header>
-        <main>
-            <h2>Sign in</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="input-group">
-                    <span className="input-group-text" id="visible-addon">👋</span>
-                    <input type="text" className="form-control" placeholder="username" aria-label="username" aria-describedby="visible-addon"/>
-                </div>
-                <div className="input-group">
-                    <span className="input-group-text" id="visible-addon">🔒</span>
-                    <input type="text" className="form-control" placeholder="password" aria-label="password" aria-describedby="visible-addon"/>
-                </div>
-                <div id="buttons">
-                <button type="submit" className="btn btn-primary">Login</button>
-                <button type="submit" className="btn btn-primary">Create Account</button>
-                </div>
-            </form>
-        </main>
-        <footer>
-            <hr/>
-            <p>Morgan Miles | <a href="https://github.com/mgmiles7/startup">GitHub</a> </p>
-        </footer>
+        <Routes>
+            <Route path = '/login' element = {<Login />} exact />
+            <Route path = '/header_footer' element = {<layout />} />
+        </Routes>
     </div>
     );
+   
 }
