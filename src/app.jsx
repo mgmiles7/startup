@@ -1,16 +1,23 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { useNavigate } from "react-router-dom";
 
 export default function App() {
-  return (
+    const navigate = useNavigate();
+    function handleSubmit(e){
+        e.preventDefault();
+        navigate("/header_footer");
+    }
+
+    return (
      <div className = "body">
         <header>
             <img src="/logo.png" alt="Us logo" id="logo"/>
         </header>
         <main>
             <h2>Sign in</h2>
-            <form method="get" action="chat.html">
+            <form onSubmit={handleSubmit}>
                 <div className="input-group">
                     <span className="input-group-text" id="visible-addon">👋</span>
                     <input type="text" className="form-control" placeholder="username" aria-label="username" aria-describedby="visible-addon"/>
