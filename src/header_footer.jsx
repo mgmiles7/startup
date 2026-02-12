@@ -5,6 +5,7 @@ import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Chat } from './chat/chat';
 import { Timeline } from './timeline/timeline';
 import { Profile } from './profile/profile';
+import { Outlet, Link} from "react-router-dom"
 
 export function Layout() {
   return (
@@ -21,12 +22,11 @@ export function Layout() {
                     </div>
                 </nav>
             </header>
-            <Routes>
-                <Route path='/' element={<Chat />} exact />
-                <Route path = '/timeline' element={<Timeline />} />
-                <Route path = 'profile' element={<Profile />} />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+
+            <div>
+                <Outlet />
+            </div>
+
             <footer className="bg-light fixed-bottom">
                 <div> 
                     <p><span id = 'name'>Morgan Miles | </span><a href="https://github.com/mgmiles7/startup">GitHub</a> </p>
