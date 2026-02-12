@@ -10,7 +10,7 @@ export default function App() {
     return ( 
         <Routes>
             <Route path = '/' element = {<Login />} exact />
-            <Route path = '/header_footer' element = {<Layout />} />
+            <Route path = '/header_footer/*' element = {<Layout />} />
         </Routes>
     );
    

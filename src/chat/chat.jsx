@@ -1,5 +1,4 @@
 import React from 'react';
-import './chat.css'
 export function Chat() {
   return (
     <div className='main'>

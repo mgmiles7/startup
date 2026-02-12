@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './chat/chat.css';
+import './chat.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Chat } from './chat/chat';
 import { Timeline } from './timeline/timeline';

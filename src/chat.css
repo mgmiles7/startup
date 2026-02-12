@@ -44,6 +44,14 @@ h3, h2 {
     margin: 0;
 }
 
+#timeline-list {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
 .post {
     margin-bottom: 10px;
 }
@@ -68,6 +76,11 @@ h3, h2 {
   word-wrap: break-word;
 }
 
+.post-text {
+    background-color: gainsboro;
+    display: inline;
+}
+
 .message-sent .bubble {
   background: #bf9dbf;
   color: #003b40;
@@ -84,7 +97,7 @@ h3, h2 {
 .timestamp {
     align-self: flex-end;
     font-style: italic;
-    font-size: .75em;
+    font-size: small;
     color: gray;
 }
 

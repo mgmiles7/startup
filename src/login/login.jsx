@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import '../app.css'
+import './login.css'
 
 export function Login() {
   const navigate = useNavigate();
