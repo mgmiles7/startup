@@ -118,9 +118,13 @@ footer > div {
     padding-right: 8px;
 }
 
-p {
+a {
     color: #bf9dbf;
     text-decoration: none;
+}
+
+#name {
+    color: black;
 }
 
 

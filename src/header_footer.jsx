@@ -29,7 +29,7 @@ export function Layout() {
             </Routes>
             <footer className="bg-light fixed-bottom">
                 <div> 
-                    <p>Morgan Miles | <a href="https://github.com/mgmiles7/startup">GitHub</a> </p>
+                    <p><span id = 'name'>Morgan Miles | </span><a href="https://github.com/mgmiles7/startup">GitHub</a> </p>
                 </div>
             </footer>
         </div>
