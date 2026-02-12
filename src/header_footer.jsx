@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
+import './chat/chat.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Chat } from './chat/chat';
 import { Timeline } from './timeline/timeline';
@@ -8,7 +8,7 @@ import { Profile } from './profile/profile';
 
 export function Layout() {
   return (
-        <div className = "body">
+        <div className='body-layout'>
             <header>
                 <nav className="navbar navbar-expand fixed-top bg-light">
                     <div className="container-fluid">

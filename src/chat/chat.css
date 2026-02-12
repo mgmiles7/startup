@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
-body {
+.body-layout {
+    background-color: white;
     display: flex;
     flex-direction: column;
     height: 100dvh;
@@ -19,7 +20,7 @@ header {
     font-family: 'Lora';
 }
 
-main {
+.main {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -87,9 +88,7 @@ h3, h2 {
     color: gray;
 }
 
-.btn.btn-primary {
-    /* background-color: #67d8e7;
-    border-color: #67dae7; */
+.btn.btn-primary.send {
     background-color: #596d73;
     border-color: #596d73;
 }
@@ -109,4 +108,22 @@ footer > div {
 p {
     color: #bf9dbf;
     text-decoration: none;
+}
+
+
+#message-row {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#message-text{
+    flex: 1 1 auto;
+
+}
+
+#send {
+    margin-left: 5px;
 }
