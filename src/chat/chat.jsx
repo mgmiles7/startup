@@ -54,7 +54,7 @@ export function Chat() {
                 </li>
             </ul>
             <div>
-            <form method="post" action="send_message">
+            <form className='composer' method="post" action="send_message">
                 <div id = 'message-row'>
                 <div id = 'message-text' className="input-group"> 
                 <input type="text" className="form-control" placeholder="message"/>

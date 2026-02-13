@@ -22,11 +22,7 @@ export function Layout() {
                     </div>
                 </nav>
             </header>
-
-            <div>
                 <Outlet />
-            </div>
-
             <footer className="bg-light fixed-bottom">
                 <div> 
                     <p><span id = 'name'>Morgan Miles | </span><a href="https://github.com/mgmiles7/startup">GitHub</a> </p>

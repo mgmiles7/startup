@@ -13,6 +13,7 @@ export default function App() {
         <Routes>
             <Route path = '/' element = {<Login />} exact />
             <Route path = '/header_footer' element = {<Layout />}>
+                <Route index element={<Chat />} />
                 <Route path='Chat' element={<Chat />} exact />
                 <Route path = 'Timeline' element={<Timeline />} />
                 <Route path = 'Profile' element={<Profile />} />
