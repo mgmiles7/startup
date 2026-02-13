@@ -132,8 +132,9 @@ a {
     text-decoration: none;
 }
 
-#name {
+#name, #log-out {
     color: black;
+    text-decoration: none;
 }
 
 
@@ -153,3 +154,4 @@ a {
 #send {
     margin-left: 5px;
 }
+
