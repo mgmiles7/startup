@@ -2,7 +2,7 @@ import React from 'react';
 
 export function Timeline() {
   return (
-    <div className='main'>
+    <div className='main timeline'>
       <h3>Our Story</h3> 
             <ul id = "timeline-list">
                 <li className="post">

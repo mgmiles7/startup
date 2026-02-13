@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
-html, body {
-    height: 100%;
-    margin: 0;
-}
 
 
 
@@ -15,6 +11,7 @@ html, body {
     overflow: hidden;
     margin: 0;
     padding: 56px;
+    width: 100%;
 }
 
 header {
@@ -27,13 +24,14 @@ header {
     font-family: 'Lora';
 }
 
-.main {
+.main.chat, .main.timeline, .main {
     display: flex;
     flex-direction: column;
     flex: 1;
     min-height: 0;
     align-items: stretch;
     overflow: hidden;
+    width: 100%;
 }
 
 h3, h2 {

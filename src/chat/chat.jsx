@@ -1,7 +1,7 @@
 import React from 'react';
 export function Chat() {
   return (
-    <div className='main'>
+    <div className='main chat'>
         <h3>Rebecca</h3>       
             <ul className = "messages">
                 <li className = "message-received message">
