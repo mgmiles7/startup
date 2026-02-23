@@ -42,7 +42,13 @@ Change the property `box-sizing` to `border-box` to define width and heighth to 
 
 ## React Part 1: Routing
 
-Setting up Vite and React was pretty simple. I had a bit of trouble because of conflicting CSS. This isn't as straight forward as you would find with Svelte or Vue, but I made it work in the end. If there was a ton of CSS it would be a real problem. It sure was nice to have the code structured in a more usable way.
+Setting up Vite and React was pretty simple.
+
+I had a hard time figuring out how to route some of the components using a nested structure with my login page and then my app pages. 
+
+I learned that I could only have one browser router component so I moved that into the app.jsx file. Using navlinks were a bit of a pain but I figured out how to get from my login page to my chat page which was the head page for the rest of the app
+
+The only other problem I had was that I wrote my CSS in a somewhat sloppy way the first time so I had to do a fair bit of restructuring there to get all of my styles to load correctly in the routed form. I also had to use the debugger to figure out which styles were being overwritten. 
 
 ## React Part 2: Reactivity
 
