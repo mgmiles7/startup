@@ -8,13 +8,26 @@ import { Timeline } from './timeline/timeline';
 import { Profile } from './profile/profile';
 
 export default function App() {
+    const [username, setUserName] = useState(localStorage.getItem('username') || "");
+    const currentAuthState = username ? AuthState.authenticated : AuthState.unauthenticated;
+    const [AuthState, setAuthState] = useState(currentAuthState)
+
+    function ProtectedRoutes({ authState, children}){
+        authState === AuthState.authenticated 
+        ? children
+        : <Login />
+    }
 
     return ( 
         <Routes>
-            <Route path = '/' element = {<Login />} exact />
-            <Route path = '/header_footer' element = {<Layout />}>
+            <Route path = 'Login' element = {<Login />} />
+            <Route path = '/' element = {
+                <ProtectedRoutes authState = {authState} >
+                    <Layout />
+                </ProtectedRoutes>
+            }>
                 <Route index element={<Chat />} />
-                <Route path='Chat' element={<Chat />} exact />
+                <Route path='Chat' element={<Chat />}/>
                 <Route path = 'Timeline' element={<Timeline />} />
                 <Route path = 'Profile' element={<Profile />} />
                 <Route path='*' element={<NotFound />} />
