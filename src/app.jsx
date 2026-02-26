@@ -6,16 +6,24 @@ import { Login } from './login/login'
 import { Chat } from './chat/chat';
 import { Timeline } from './timeline/timeline';
 import { Profile } from './profile/profile';
+import { AuthState } from './login/authState';
 
 export default function App() {
-    const [username, setUserName] = useState(localStorage.getItem('username') || "");
-    const currentAuthState = username ? AuthState.authenticated : AuthState.unauthenticated;
-    const [AuthState, setAuthState] = useState(currentAuthState)
+    const [username, setUserName] = React.useState(localStorage.getItem('username') || "");
+    const currentAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState)
 
     function ProtectedRoutes({ authState, children}){
-        authState === AuthState.authenticated 
+        return authState === AuthState.Authenticated 
         ? children
-        : <Login />
+        : <Login 
+            username = {username}
+            authState={authState}
+            onAuthChange={(userName,authState) => {
+                setAuthState(authState);
+                setUserName(userName);
+            }}
+        />
     }
 
     return ( 

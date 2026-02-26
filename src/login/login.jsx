@@ -1,14 +1,27 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { AuthState } from './authState';
 import './login.css'
 
-export function Login() {
-  const navigate = useNavigate();
-      function handleSubmit(e){
+export function Login(props) {
+    const [userName, setUserName] = React.useState(props.userName);
+    const [password, setPassword] = React.useState('');
+    const navigate = useNavigate();
+    function handleSubmit(e){
         e.preventDefault();
         navigate("/header_footer");
-      }
+    }
+    async function loginUser() {
+        localStorage.setItem('username', userName)
+        props.onAuthChange(userName, AuthState.Authenticated)
+    }
+    async function createUser() {
+        localStorage.setItem('userName', userName)
+        props.onAuthChange(userName, AuthState.Authenticated)
+    }
+    
+    
     
   return (
       <div className='body'>
@@ -20,15 +33,15 @@ export function Login() {
             <form method="get" onSubmit={handleSubmit}>
                 <div className="input-group">
                     <span className="input-group-text" id="visible-addon">👋</span>
-                    <input type="text" className="form-control" placeholder="username" aria-label="username" aria-describedby="visible-addon"/>
+                    <input type="text" className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="username" aria-label="username" aria-describedby="visible-addon"/>
                 </div>
                 <div className="input-group">
                     <span className="input-group-text" id="visible-addon">🔒</span>
-                    <input type="text" className="form-control" placeholder="password" aria-label="password" aria-describedby="visible-addon"/>
+                    <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" aria-label="password" aria-describedby="visible-addon"/>
                 </div>
                 <div id="buttons">
-                <button type="submit" className="btn btn-primary">Login</button>
-                <button type="submit" className="btn btn-primary">Create Account</button>
+                <button onClick={() => loginUser()} className="btn btn-primary">Login</button>
+                <button onClick={() => createUser()} className="btn btn-primary">Create Account</button>
                 </div>
             </form>
         </main>
