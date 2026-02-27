@@ -37,7 +37,16 @@ export default function App() {
                 <Route index element={<Chat />} />
                 <Route path='Chat' element={<Chat />}/>
                 <Route path = 'Timeline' element={<Timeline />} />
-                <Route path = 'Profile' element={<Profile />} />
+                <Route path = 'Profile' 
+                    element={<Profile 
+                        username = {username}
+                        authState={authState}
+                        onAuthChange={(userName,authState) => {
+                            setAuthState(authState);
+                            setUserName(userName);
+                        }}
+                    />} 
+                />
                 <Route path='*' element={<NotFound />} />
             </Route> 
         </Routes>

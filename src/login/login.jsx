@@ -17,8 +17,9 @@ export function Login(props) {
         props.onAuthChange(userName, AuthState.Authenticated)
     }
     async function createUser() {
-        localStorage.setItem('userName', userName)
-        props.onAuthChange(userName, AuthState.Authenticated)
+        localStorage.setItem('username', userName)
+        props.onAuthChange('', AuthState.Authenticated)
+
     }
     
     
