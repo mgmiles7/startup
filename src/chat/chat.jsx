@@ -1,6 +1,12 @@
 import React from 'react';
+import { Modal } from "react-bootstrap";
+import { Search } from './userSearch';
 export function Chat() {
+  const [linked, changeLink] = React.useState(false);
+  const [show, setShow] = React.useState(linked);
+  
   return (
+    <>
     <div className='main chat'>
         <h3>Rebecca</h3>       
             <ul className = "messages">
@@ -66,5 +72,7 @@ export function Chat() {
             </form>
             </div>
     </div>
+    <Search />
+    </>
   );
 }
