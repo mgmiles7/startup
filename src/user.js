@@ -1,7 +1,8 @@
-class User {
-    constructor(id){
+export class User {
+    constructor(username, password){
         this.linked = false;
-        this.name = id;
+        this.password = password
+        this.username = username;
         this.messages = [];
         this.posts = [];
     }

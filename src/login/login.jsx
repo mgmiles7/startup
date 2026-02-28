@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { AuthState } from './authState';
+import { User } from '../user';
 import './login.css'
 
 export function Login(props) {
@@ -13,12 +14,20 @@ export function Login(props) {
         navigate("/header_footer");
     }
     async function loginUser() {
-        localStorage.setItem('username', userName)
-        props.onAuthChange(userName, AuthState.Authenticated)
+        const user = new User(userName, password);
+        localStorage.setItem('user', JSON.stringify({
+            userName: user.username,
+            password: password
+        }))
+        localStorage.setItem('username', userName);
+        props.onAuthChange(user, AuthState.Authenticated);
+
     }
     async function createUser() {
+        const user = new User(userName, password);
         localStorage.setItem('username', userName)
         props.onAuthChange('', AuthState.Authenticated)
+        props.onAuthChange(user, AuthState.Authenticated)
 
     }
     

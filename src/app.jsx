@@ -7,22 +7,35 @@ import { Chat } from './chat/chat';
 import { Timeline } from './timeline/timeline';
 import { Profile } from './profile/profile';
 import { AuthState } from './login/authState';
+import { User } from './user';
 
 export default function App() {
-    const [username, setUserName] = React.useState(localStorage.getItem('username') || "");
-    const currentAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
-    const [authState, setAuthState] = React.useState(currentAuthState)
-    const [linked, changeLink] = React.useState({state: false, id:""}); 
+    // const [userName, setUserName] = React.useState(localStorage.getItem('username') || "");
+    // const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    // const [authState, setAuthState] = React.useState(currentAuthState)
+    // const [linked, changeLink] = React.useState({state: false, id: userName});
+
+    const [user, setUser] = React.useState(() => {
+        const savedUser = localStorage.getItem('user');
+
+        if (!savedUser) return null;
+
+        const parsed = JSON.parse(savedUser);
+        return new User(parsed.userName, parsed.password)
+    })
+    const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+    const [linked, changeLink] = React.useState(false);
 
     function ProtectedRoutes({ authState, children}){
         return authState === AuthState.Authenticated 
         ? children
         : <Login 
-            username = {username}
+            user = {user}
             authState={authState}
-            onAuthChange={(userName,authState) => {
+            onAuthChange={(user,authState) => {
                 setAuthState(authState);
-                setUserName(userName);
+                setUser(user);
             }}
         />
     }
@@ -35,16 +48,16 @@ export default function App() {
                     <Layout />
                 </ProtectedRoutes>
             }>
-                <Route index element={<Chat linked={linked} changeLink={changeLink}/>} />
-                <Route path='Chat' element={<Chat linked={linked} changeLink={changeLink}/>}/>
-                <Route path = 'Timeline' element={<Timeline linked={linked} changeLink={changeLink}/>} />
+                <Route index element={<Chat user= {user} setUser = {setUser} linked={linked} changeLink={changeLink} />} />
+                <Route path='Chat' element={<Chat user= {user} setUser = {setUser} linked={linked} changeLink={changeLink}/>}/>
+                <Route path = 'Timeline' element={<Timeline user= {user} setUser = {setUser} linked={linked} changeLink={changeLink}/>} />
                 <Route path = 'Profile' 
                     element={<Profile 
-                        username = {username}
+                        user = {user}
                         authState={authState}
-                        onAuthChange={(userName,authState) => {
+                        onAuthChange={(user,authState) => {
                             setAuthState(authState);
-                            setUserName(userName);
+                            setUser(user);
                         }}
                     />} 
                 />

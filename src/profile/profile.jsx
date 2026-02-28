@@ -7,14 +7,14 @@ export function Profile(props) {
   const navigate = useNavigate();
   function logout(){
     localStorage.removeItem('username');
-    props.onAuthChange(props.userName, AuthState.Unauthenticated)
+    props.onAuthChange(null, AuthState.Unauthenticated)
     navigate("/");
   }
 
   return (
     <div className="main">
       <img src="../logo.png" alt="Us logo"/>
-            <h2 id = "user">{props.username}</h2>
+            <h2 id = "user">{props.user.username}</h2>
             <p id = 'name'>Time with Rebecca: 5 months</p>
             <div>
             <button className="btn btn-primary send" type="submit">Idea please!</button>

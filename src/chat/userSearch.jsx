@@ -39,10 +39,12 @@ export function Search({linked, changeLink}){
                 <div>
                     <Button disabled={!found} onClick={(() =>
                         {
-                            changeLink(prev => ({
-                                state: true,
-                                id: searchItem
-                            }));
+                            setUser(prev => ({
+                                ...prev,
+                                linked: true
+                            })
+                            )
+                            changeLink(true);
                         }
                     )}>Link</Button>
                 </div>
