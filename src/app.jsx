@@ -12,6 +12,7 @@ export default function App() {
     const [username, setUserName] = React.useState(localStorage.getItem('username') || "");
     const currentAuthState = username ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState)
+    const [linked, changeLink] = React.useState({state: false, id:""}); 
 
     function ProtectedRoutes({ authState, children}){
         return authState === AuthState.Authenticated 
@@ -34,9 +35,9 @@ export default function App() {
                     <Layout />
                 </ProtectedRoutes>
             }>
-                <Route index element={<Chat />} />
-                <Route path='Chat' element={<Chat />}/>
-                <Route path = 'Timeline' element={<Timeline />} />
+                <Route index element={<Chat linked={linked} changeLink={changeLink}/>} />
+                <Route path='Chat' element={<Chat linked={linked} changeLink={changeLink}/>}/>
+                <Route path = 'Timeline' element={<Timeline linked={linked} changeLink={changeLink}/>} />
                 <Route path = 'Profile' 
                     element={<Profile 
                         username = {username}

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Modal } from "react-bootstrap";
 import { Search } from './userSearch';
-export function Chat() {
-  const [linked, changeLink] = React.useState({state: false, id:""});
+export function Chat(props) {
   return (
     <>
     <div className='main chat'>
-        <h3>{linked.id}</h3>       
+        <h3>{props.linked.id}</h3>       
             <ul className = "messages">
                 <li className = "message-received message">
                     <div className="bubble">
@@ -70,7 +69,7 @@ export function Chat() {
             </form>
             </div>
     </div>
-    <Search linked={linked} changeLink={changeLink} />
+    <Search linked={props.linked} changeLink={props.changeLink} />
     </>
   );
 }

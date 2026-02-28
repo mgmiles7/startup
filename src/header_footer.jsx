@@ -7,7 +7,7 @@ import { Timeline } from './timeline/timeline';
 import { Profile } from './profile/profile';
 import { Outlet, Link} from "react-router-dom"
 
-export function Layout() {
+export function Layout() { 
   return (
         <div className='body-layout'>
             <header>
