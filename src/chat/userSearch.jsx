@@ -18,15 +18,9 @@ export function Search({linked}){
         { id: "user4", text: "Charlie"}
     ])
     const [searchItem, setSearchItem] = React.useState('');
-    const [found, setFound] = React.useState(false);
-    const infilteredList = userList.filter((item) => {
-            if (item.text === searchItem && searchItem !== '') {
-                () => setFound(true);
-            } else {
-                () => setFound(false);
-            }
-    })
-
+    const found = userList.some(
+        (item) => item.text === searchItem && searchItem !== ""
+    );
     return (
         <Modal size="lg" show = {show} onHide={() => handleClose()} centered backdrop="static" keyboard={false}>
             <Modal.Header>
@@ -34,25 +28,11 @@ export function Search({linked}){
             </Modal.Header>
             <Modal.Body>
                 <div className="searchBox">
-                    <input type="text" placeholder="Search..." value={searchItem} onChange={(e) => 
-                        {setSearchItem(e.target.value); 
-                            infilteredList()}} 
+                    <input type="text" placeholder="Search..." value={searchItem} onChange={(e) => setSearchItem(e.target.value)} 
                         style = {{
                             outlineColor: found ? "green" : "red"
                         }}
                     />
-                    {/* <div>
-                    <select className="search-results">
-                        {filteredList.map((item) =>
-                            (<option key={item.id}>{item.text}</option>)
-                        )}
-                    </select>
-                    </div> */}
-                    {/* <ul className="search-results">
-                        {filteredList.map((item) => (
-                            <li key={item.id}>{item.text}</li>
-                        ))}
-                    </ul> */}
                 </div>
             </Modal.Body>
         </Modal>
