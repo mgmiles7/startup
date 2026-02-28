@@ -41,7 +41,8 @@ export function Search({linked, changeLink, user, setUser}){
                         {
                             setUser(prev => ({
                                 ...prev,
-                                linked: true
+                                linked: true,
+                                with: searchItem
                             })
                             )
                             changeLink(true);

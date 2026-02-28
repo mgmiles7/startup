@@ -6,7 +6,7 @@ export function Chat(props) {
   return (
     <>
     <div className='main chat'>
-        <h3>Hey</h3>       
+        <h3>{props.user.with}</h3>       
             <ul className = "messages">
                 {/* {props.id.messages.map((item) =>
                 <li className= {props.id.name === localStorage.getItem('username') 
