@@ -2,10 +2,10 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import './modal.css'
-export function Search({linked, changeLink}){
+export function Search({linked, changeLink, user, setUser}){
     const [show, setShow] = React.useState(true);
     React.useEffect(() => {
-        if (linked.state === false){
+        if (linked === false){
             setShow(true);
         } else {
             setShow(false);
