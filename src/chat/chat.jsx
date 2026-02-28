@@ -4,7 +4,7 @@ import { Search } from './userSearch';
 export function Chat() {
   const [linked, changeLink] = React.useState(false);
   const [show, setShow] = React.useState(linked);
-  
+
   return (
     <>
     <div className='main chat'>
@@ -72,7 +72,7 @@ export function Chat() {
             </form>
             </div>
     </div>
-    <Search />
+    <Search linked={linked} />
     </>
   );
 }
