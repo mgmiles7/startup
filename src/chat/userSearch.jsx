@@ -1,11 +1,14 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
-export function Search({linked}){
+export function Search({linked, changeLink}){
     const [show, setShow] = React.useState(true);
     React.useEffect(() => {
-        if (linked === false){
+        if (linked.state === false){
             setShow(true);
+        } else {
+            setShow(false);
         }
     }, [linked]);
     const handleOpen = () => setShow(true);
@@ -33,6 +36,16 @@ export function Search({linked}){
                             outlineColor: found ? "green" : "red"
                         }}
                     />
+                </div>
+                <div>
+                    <Button disabled={!found} onClick={(() =>
+                        {
+                            changeLink(prev => ({
+                                state: true,
+                                id: searchItem
+                            }));
+                        }
+                    )}>Link</Button>
                 </div>
             </Modal.Body>
         </Modal>
