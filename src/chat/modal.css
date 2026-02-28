@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+.Header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 0;
+    border: none;
+    font-family: 'Lora';
+}
+
+.Body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 8px ;
+}
+
+.Body >* {
+    padding-bottom: 8px;
+}
+
+input {
+    border-radius: 5px;
+}
+

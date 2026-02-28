@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-
+import './modal.css'
 export function Search({linked, changeLink}){
     const [show, setShow] = React.useState(true);
     React.useEffect(() => {
@@ -11,7 +11,6 @@ export function Search({linked, changeLink}){
             setShow(false);
         }
     }, [linked]);
-    const handleOpen = () => setShow(true);
     const handleClose = () => setShow(false);
     const[userList] = React.useState([
         //simulating a list of users that will be populate a database
@@ -25,13 +24,13 @@ export function Search({linked, changeLink}){
         (item) => item.text === searchItem && searchItem !== ""
     );
     return (
-        <Modal size="lg" show = {show} onHide={() => handleClose()} centered backdrop="static" keyboard={false}>
-            <Modal.Header>
+        <Modal size="sm" show = {show} onHide={() => handleClose()} centered backdrop="static" keyboard={false}>
+            <Modal.Header className="Header">
                 Let's turn this from you into Us
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="Body">
                 <div className="searchBox">
-                    <input type="text" placeholder="Search..." value={searchItem} onChange={(e) => setSearchItem(e.target.value)} 
+                    <input type="text" placeholder="Search user..." value={searchItem} onChange={(e) => setSearchItem(e.target.value)} 
                         style = {{
                             outlineColor: found ? "green" : "red"
                         }}
