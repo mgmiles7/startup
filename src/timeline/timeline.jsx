@@ -1,11 +1,34 @@
 import React from 'react';
+import { Post } from '../posts';
 
-export function Timeline() {
+export function Timeline(props) {
+    const [post, setPost] = React.useState('');
+    function sendPost(post) {
+            const now = new Date()
+            const date = now.toLocaleDateString();
+            const hours = now.getHours() - 12;
+            const minutes = now.getMinutes();
+            const time = `${date} ${hours}:${minutes}`
+            const id = now.getMilliseconds();
+            const pos = new Post(post, props.user.username, time, id)
+            props.setUser(prev => ({
+                ...prev,
+                posts: [...prev.posts, pos]
+            }))
+        }
+
   return (
     <div className='main timeline'>
       <h3>Our Story</h3> 
             <ul id = "timeline-list">
-                <li className="post">
+                {props.user.posts.map((item) =>
+                <li key={item.id} className="post">
+                    <div className='post-text'>
+                        {item.text}
+                    </div>
+                    <span className='timestamp'>{item.timestamp}</span>
+                </li>)}
+                {/* <li className="post">
                     <div className="post-text">
                         We got to go night-skiing and the snow was just perfect! the hot cocoa after was
                         great too!
@@ -14,42 +37,18 @@ export function Timeline() {
                         December 23 at 11:42
                     </span>
                 </li>
-                <li className = "post">
-                    <div className="post-text saved-message">
-                        I just booked our appointment at the gallery! soo excited!
-                    </div>
-                    <span className="timestamp">
-                        saved on Dec 27 at 9:38 
-                    </span>
-                </li>
-                <li className="post">
-                    <div className="post-text">
-                        we looked through the whole gallery and finally in the last room we found the 
-                        perfect painting for our apartment!!
-                    </div>
-                    <span className="timestamp">
-                        Jan 4 at 7:44 
-                    </span>
-                </li>
-                <li className="post">
-                    <div className="post-text">
-                        during our lunch break we met up at this little french bakery and it was soo good!
-                    </div>
-                    <span className="timestamp">
-                        Jan 14 at 5:12 
-                    </span>
-                </li>
+                 */}
             </ul>
-            <form method="post" action="post_entry">
+            <div>
                   <div id='message-row'>
                     <div id = 'message-text' className="input-group"> 
-                    <input type="text" className="form-control" placeholder="start remebering..."/>
+                    <input type="text" className="form-control" placeholder="start remebering..." value={post} onChange={(e) => setPost(e.target.value)}/>
                     </div>
                     <div>
-                    <button type="submit" className="btn btn-primary send" id = 'send'>Post</button>
+                    <button className="btn btn-primary send" id = 'send' onClick={() => sendPost(post)}>Post</button>
                     </div>
                   </div>
-            </form>
+            </div>
             
     </div>
   );

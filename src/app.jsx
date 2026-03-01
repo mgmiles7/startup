@@ -26,6 +26,8 @@ export default function App() {
     const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
     const [linked, changeLink] = React.useState(false);
+    const [chatActive, setChatActive] = React.useState(false);
+    
 
     function ProtectedRoutes({ authState, children}){
         return authState === AuthState.Authenticated 
@@ -38,7 +40,18 @@ export default function App() {
                 setUser(user);
             }}
         />
+    
     }
+
+    const chatElement = (
+    <Chat
+        user={user}
+        setUser={setUser}
+        linked={linked}
+        changeLink={changeLink}
+        chatActive={chatActive}
+        setChatActive={setChatActive} />
+    )
 
     return ( 
         <Routes>
@@ -48,8 +61,8 @@ export default function App() {
                     <Layout />
                 </ProtectedRoutes>
             }>
-                <Route index element={<Chat user= {user} setUser = {setUser} linked={linked} changeLink={changeLink} />} />
-                <Route path='Chat' element={<Chat user= {user} setUser = {setUser} linked={linked} changeLink={changeLink}/>}/>
+                <Route index element={chatElement} />
+                <Route path='Chat' element={chatElement}/>
                 <Route path = 'Timeline' element={<Timeline user= {user} setUser = {setUser} linked={linked} changeLink={changeLink}/>} />
                 <Route path = 'Profile' 
                     element={<Profile 

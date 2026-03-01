@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import './modal.css'
-export function Search({linked, changeLink, user, setUser}){
+export function Search({linked, changeLink, user, setUser, chatActive, setChatActive}){
     const [show, setShow] = React.useState(true);
     React.useEffect(() => {
         if (linked === false){
@@ -45,7 +45,10 @@ export function Search({linked, changeLink, user, setUser}){
                                 with: searchItem
                             })
                             )
+                            setChatActive(true);
+                            console.log(setChatActive);
                             changeLink(true);
+                            
                         }
                     )}>Link</Button>
                 </div>

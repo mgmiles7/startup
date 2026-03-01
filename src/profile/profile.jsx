@@ -15,7 +15,7 @@ export function Profile(props) {
     <div className="main">
       <img src="../logo.png" alt="Us logo"/>
             <h2 id = "user">{props.user.username}</h2>
-            <p id = 'name'>Time with Rebecca: 5 months</p>
+            <p id = 'name'>{`Time with ${props.user.with}`}: 5 months</p>
             <div>
             <button className="btn btn-primary send" type="submit">Idea please!</button>
             <button className="btn btn-outline-primary" onClick={() => logout()} >Log-out</button>
