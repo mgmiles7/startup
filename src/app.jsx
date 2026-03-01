@@ -61,8 +61,22 @@ export default function App() {
                     <Layout />
                 </ProtectedRoutes>
             }>
-                <Route index element={chatElement} />
-                <Route path='Chat' element={chatElement}/>
+                <Route index element={<Chat 
+                    user={user}
+                    setUser={setUser}
+                    linked={linked}
+                    changeLink={changeLink}
+                    chatActive={chatActive}
+                    setChatActive={setChatActive} />} 
+                />
+                <Route path='Chat' element={<Chat 
+                    user={user}
+                    setUser={setUser}
+                    linked={linked}
+                    changeLink={changeLink}
+                    chatActive={chatActive}
+                    setChatActive={setChatActive} />}
+                />
                 <Route path = 'Timeline' element={<Timeline user= {user} setUser = {setUser} linked={linked} changeLink={changeLink}/>} />
                 <Route path = 'Profile' 
                     element={<Profile 
