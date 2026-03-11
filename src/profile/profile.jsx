@@ -6,11 +6,26 @@ import { AuthState } from '../login/authState';
 export function Profile(props) {
   const [showApi, setAPI] = React.useState(false);
   const navigate = useNavigate();
-  function logout(){
-    localStorage.removeItem('username');
-    props.onAuthChange(null, AuthState.Unauthenticated)
-    navigate("/");
+  // function logoutOld(){
+  //   localStorage.removeItem('username');
+  //   props.onAuthChange(null, AuthState.Unauthenticated)
+  //   navigate("/");
+  // }
+
+  function logout() {
+    fetch('/api/auth/logout', {
+      method: 'delete',
+    })
+      .catch (() => {
+        //Logoout failed. Assuming offline
+      })
+      .finally(() => {
+        localStorage.removeItem('user');
+        props.onAuthChange(null, AuthState.Unauthenticated);
+        navigate("/");
+      });
   }
+
   function apiHandler() {
     setAPI(!showApi);
   }
