@@ -96,8 +96,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - Implemented log in and log out as well as sending messages and posting posts on the timeline. I simulated receiving a message using `setInterval` put it in a `useEffect` hook. I also added functionality to select a user to link your profile with for chat and timeline. User info is stored in localStorage.
+- [x] **Hooks** - I used multiple hooks including many instances of `useState` as well as `setInterval` and `useEffect` for the chat section.
 
 ## 🚀 Service deliverable
 
