@@ -8,6 +8,7 @@ const authCookieName = 'token';
 
 let users = [];
 let usernames = [];
+let messages = new Map();
 
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -84,6 +85,25 @@ apiRouter.post('/auth/update', async (req, res) => {
 apiRouter.get('/auth/users', async (req, res) => {
     res.json(usernames);
 })
+// send message
+apiRouter.put('/auth/sendMessage', async (req, res) =>{
+    const message = {
+        text: req.body.text,
+        time: req.body.time,
+        id: uuid.v4(),
+    }
+    const user = await findUser('token', req.cookies[authCookieName]);
+    messages.set(user.username, messages.get(user.username).push(message));
+    messages.set(user.with, messages.get(user.with).push(message));
+    res.json(message);
+
+})
+
+//get messages
+apiRouter.get('/auth/getMessages', async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    res.json(messages.get(user.username));
+})
 
 //verification check
 const verifyAuth = async (req, res, next) => {
@@ -109,6 +129,7 @@ async function createUser(username, password) {
   };
   users.push(user);
   usernames.push(user.username);
+  messages.set(user.username, {});
 
   return user;
 }
