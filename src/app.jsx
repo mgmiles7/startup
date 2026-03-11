@@ -21,7 +21,7 @@ export default function App() {
         if (!savedUser) return null;
 
         const parsed = JSON.parse(savedUser);
-        return new User(parsed.userName, parsed.password)
+        return new User(parsed.userName, parsed.linked, parsed.with);
     })
     const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
