@@ -13,16 +13,16 @@ export function Login(props) {
         e.preventDefault();
         navigate("/header_footer");
     }
-    async function loginUser() {
-        const user = new User(userName, password);
-        localStorage.setItem('user', JSON.stringify({
-            userName: user.username,
-            password: password
-        }))
-        localStorage.setItem('username', userName);
-        props.onAuthChange(user, AuthState.Authenticated);
+    // async function loginUser() {
+    //     const user = new User(userName, password);
+    //     localStorage.setItem('user', JSON.stringify({
+    //         userName: user.username,
+    //         password: password
+    //     }))
+    //     localStorage.setItem('username', userName);
+    //     props.onAuthChange(user, AuthState.Authenticated);
 
-    }
+    // }
 
     async function loginUser() {
         loginOrCreate(`/api/auth/login`);
@@ -35,13 +35,14 @@ export function Login(props) {
     async function loginOrCreate(endpoint){
         const response = await fetch(endpoint, {
             method: 'post',
-            body: JSON.stringify({ email: userName, password: password}),
+            body: JSON.stringify({ username: userName, password: password}),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
             },
         });
         if (response?.status === 200) {
-            localStorage.setItem('username', userName);
+            const user = JSON.parse(response)
+            localStorage.setItem('user', user);
             props.onAuthChange(user, AuthState.Authenticated);
 
         }
