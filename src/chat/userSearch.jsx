@@ -12,16 +12,51 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
         }
     }, [linked]);
     const handleClose = () => setShow(false);
-    const[userList] = React.useState([
-        //simulating a list of users that will be populate a database
-        { id: "user1", text: "Rebecca" },
-        { id: "user2", text: "John"},
-        { id: "user3", text: "Mary"},
-        { id: "user4", text: "Charlie"}
-    ])
+    // const users = React.useState([
+    //     //simulating a list of users that will be populate a database
+    //     { id: "user1", text: "Rebecca" },
+    //     { id: "user2", text: "John"},
+    //     { id: "user3", text: "Mary"},
+    //     { id: "user4", text: "Charlie"}
+    // ])
+
+    const [userList, setUserList] = React.useState([]);
+
+    React.useEffect(() => {
+        getUsers();
+    }, [])
+
+
+
+    async function getUsers() {
+        const response = await fetch('/api/auth/users', {
+            method: 'get',
+        })
+        let users =  await response.json();
+        setUserList(users);
+
+    }
+
+    async function updateUser(username) {
+        const response = await fetch('/api/auth/update', {
+            method: 'post',
+            body: JSON.stringify({
+                linked: 'true',
+                with: username
+            }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+        })
+        let user = await response.json();
+        localStorage.setItem('user', JSON.stringify(user));
+    }
+
+    
+
     const [searchItem, setSearchItem] = React.useState('');
     const found = userList.some(
-        (item) => item.text === searchItem && searchItem !== ""
+        (item) => item === searchItem && searchItem !== ""
     );
     return (
         <Modal size="sm" show = {show} onHide={() => handleClose()} centered backdrop="static" keyboard={false}>
@@ -39,12 +74,7 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
                 <div>
                     <Button disabled={!found} onClick={(() =>
                         {
-                            setUser(prev => ({
-                                ...prev,
-                                linked: true,
-                                with: searchItem
-                            })
-                            )
+                            updateUser(searchItem);
                             setChatActive(true);
                             console.log(setChatActive);
                             changeLink(true);

@@ -29,7 +29,7 @@ export function Login(props) {
     }
 
     async function createUser() {
-        loginOrCreate(`api/auth/create`);
+        loginOrCreate(`/api/auth/create`);
     }
 
     async function loginOrCreate(endpoint){

@@ -20,7 +20,7 @@ export function Timeline(props) {
   return (
     <div className='main timeline'>
       <h3>Our Story</h3> 
-            <ul id = "timeline-list">
+            {/* <ul id = "timeline-list">
                 {props.user.posts.map((item) =>
                 <li key={item.id} className="post">
                     <div className='post-text'>
@@ -37,8 +37,8 @@ export function Timeline(props) {
                         December 23 at 11:42
                     </span>
                 </li>
-                 */}
-            </ul>
+                 
+            </ul> */}
             <div>
                   <div id='message-row'>
                     <div id = 'message-text' className="input-group"> 

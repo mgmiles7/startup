@@ -7,6 +7,7 @@ const app = express();
 const authCookieName = 'token';
 
 let users = [];
+let usernames = [];
 
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -42,7 +43,12 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (await bcrypt.compare(req.body.password, user.password)) {
       user.token = uuid.v4();
       setAuthCookie(res, user.token);
-      res.send({ username: user.username });
+      res.send({ 
+            username: user.username,
+            linked: user.linked,
+            with: user.with,
+
+        });
       return;
     }
   }
@@ -58,6 +64,26 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
+
+//update user
+apiRouter.post('/auth/update', async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    user = {
+        username: user.username,
+        linked: req.body.linked,
+        with: req.body.with
+    }
+    res.send({ 
+            username: user.username,
+            linked: user.linked,
+            with: user.with,
+        });
+})
+
+//get users
+apiRouter.get('/auth/users', async (req, res) => {
+    res.json(usernames);
+})
 
 //verification check
 const verifyAuth = async (req, res, next) => {
@@ -82,6 +108,7 @@ async function createUser(username, password) {
     with: null
   };
   users.push(user);
+  usernames.push(user.username);
 
   return user;
 }
