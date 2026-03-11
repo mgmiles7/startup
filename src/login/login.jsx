@@ -41,21 +41,21 @@ export function Login(props) {
             },
         });
         if (response?.status === 200) {
-            const user = JSON.parse(response)
-            localStorage.setItem('user', user);
+            const user = await response.json();
+            localStorage.setItem('user', JSON.stringify(user));
             props.onAuthChange(user, AuthState.Authenticated);
 
         }
     }
 
 
-    async function createUser() {
-        const user = new User(userName, password);
-        localStorage.setItem('username', userName)
-        props.onAuthChange('', AuthState.Authenticated)
-        props.onAuthChange(user, AuthState.Authenticated)
+    // async function createUser() {
+    //     const user = new User(userName, password);
+    //     localStorage.setItem('username', userName)
+    //     props.onAuthChange('', AuthState.Authenticated)
+    //     props.onAuthChange(user, AuthState.Authenticated)
 
-    }
+    // }
     
     
     
