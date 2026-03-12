@@ -26,10 +26,12 @@ export function Login(props) {
 
     async function loginUser() {
         loginOrCreate(`/api/auth/login`);
+        navigate("/header_footer");
     }
 
     async function createUser() {
         loginOrCreate(`/api/auth/create`);
+        navigate("/header_footer");
     }
 
     async function loginOrCreate(endpoint){

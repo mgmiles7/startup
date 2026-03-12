@@ -7,6 +7,8 @@ export function Chat(props) {
     console.log("Chat mounted");
     }, []);
     const [message, setMessage] = React.useState([]);
+    const [inputMessage, setInputMessage] = React.useState("")
+    const user = JSON.parse(localStorage.getItem('user'));
     function createMessage(message) {
         const now = new Date()
         const date = now.toLocaleDateString();
@@ -14,11 +16,11 @@ export function Chat(props) {
         const minutes = now.getMinutes();
         const time = `${date} ${hours}:${minutes}`
         //const id = now.getMilliseconds();
-        const message = {
+        const msg = {
             text: message,
             time: time,
         }
-        return message;
+        return msg;
         // const mess = new Message(message, props.user.username, time, id)
         // props.setUser(prev => ({
         //     ...prev,
@@ -35,19 +37,22 @@ export function Chat(props) {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
-        let msg = await response.json();
+        msg = await response.json();
         setMessage(prev => [...prev, msg]);
     }
 
     async function getMessages(){
-        const response = await fetch('/api/getMessages', {
+        const response = await fetch('/api/auth/getMessages', {
             method: 'get',
         });
         const data = await response.json();
+        console.log("server returned:", data);
+        console.log("is array?", Array.isArray(data));
         setMessage(data);
     }
 
     React.useEffect(() => {
+        getMessages();
         const interval = setInterval(getMessages, 3000);
         return () => clearInterval(interval)
     }, []);
@@ -57,17 +62,18 @@ export function Chat(props) {
     React.useEffect(() => {
          if (!props.chatActive) return;
         const id = setInterval(() => {
-            createMessage("Less annoying filler message")
+            let filler = createMessage("Less annoying filler message");
+            setMessage(prev => [...prev, filler])
         },8000);
         return () => clearInterval(id);
     }, [props.chatActive])
   return (
     <>
     <div className='main chat'>
-        <h3>{localStorage.getItem(user.with)}</h3>       
+        <h3>{user.with}</h3>       
             <ul className = "messages">
                 {message.map((item) =>
-                <li key={item.id} className= {(item.sender === localStorage.getItem(user.username)) 
+                <li key={item.id} className= {(item.sender === user.username) 
                     ? "message-sent message" 
                     : "message-received message"}>
                     <div className='bubble'>
@@ -92,10 +98,10 @@ export function Chat(props) {
             <div className='composer'>
                 <div id = 'message-row'>
                 <div id = 'message-text' className="input-group"> 
-                <input type="text" className="form-control" placeholder="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                <input type="text" className="form-control" placeholder="message" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)}/>
                 </div>
                 <div>
-                <button id = 'send' className="btn btn-primary send" onClick={() => sendMessage(message)}>Send</button>
+                <button id = 'send' className="btn btn-primary send" onClick={() => sendMessage(inputMessage)}>Send</button>
                 </div>
                 </div>
             </div>

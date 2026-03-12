@@ -86,15 +86,20 @@ apiRouter.get('/auth/users', async (req, res) => {
     res.json(usernames);
 })
 // send message
-apiRouter.put('/auth/sendMessage', async (req, res) =>{
+apiRouter.post('/auth/sendMessage', async (req, res) =>{
+const user = await findUser('token', req.cookies[authCookieName]);
     const message = {
         text: req.body.text,
         time: req.body.time,
+        sender: user.username,
         id: uuid.v4(),
     }
-    const user = await findUser('token', req.cookies[authCookieName]);
-    messages.set(user.username, messages.get(user.username).push(message));
-    messages.set(user.with, messages.get(user.with).push(message));
+
+    const senderMessages = messages.get(user.username);
+    const receiverMessages = messages.get(user.with);
+
+    senderMessag
+    console.log(message)
     res.json(message);
 
 })
@@ -102,7 +107,9 @@ apiRouter.put('/auth/sendMessage', async (req, res) =>{
 //get messages
 apiRouter.get('/auth/getMessages', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    res.json(messages.get(user.username));
+    const userMessages = messages.get(user.username) || [];
+    console.log(userMessages)
+    res.json(userMessages);
 })
 
 //verification check
@@ -129,7 +136,7 @@ async function createUser(username, password) {
   };
   users.push(user);
   usernames.push(user.username);
-  messages.set(user.username, {});
+  messages.set(user.username, []);
 
   return user;
 }
