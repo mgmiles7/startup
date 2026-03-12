@@ -9,10 +9,6 @@ export function Login(props) {
     const [userName, setUserName] = React.useState(props.userName);
     const [password, setPassword] = React.useState('');
     const navigate = useNavigate();
-    function handleSubmit(e){
-        e.preventDefault();
-        navigate("/header_footer");
-    }
     // async function loginUser() {
     //     const user = new User(userName, password);
     //     localStorage.setItem('user', JSON.stringify({
@@ -26,12 +22,12 @@ export function Login(props) {
 
     async function loginUser() {
         loginOrCreate(`/api/auth/login`);
-        navigate("/header_footer");
+        navigate("/");
     }
 
     async function createUser() {
         loginOrCreate(`/api/auth/create`);
-        navigate("/header_footer");
+        navigate("/");
     }
 
     async function loginOrCreate(endpoint){
@@ -68,7 +64,7 @@ export function Login(props) {
         </header>
         <main>
             <h2>Sign in</h2>
-            <form method="get" onSubmit={handleSubmit}>
+            <div className='input-holder'>
                 <div className="input-group">
                     <span className="input-group-text" id="visible-addon">👋</span>
                     <input type="text" className="form-control" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="username" aria-label="username" aria-describedby="visible-addon"/>
@@ -81,7 +77,7 @@ export function Login(props) {
                 <button onClick={() => loginUser()} className="btn btn-primary">Login</button>
                 <button onClick={() => createUser()} className="btn btn-primary">Create Account</button>
                 </div>
-            </form>
+            </div>
         </main>
         <footer>
             <hr/>
