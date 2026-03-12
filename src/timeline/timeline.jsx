@@ -61,7 +61,7 @@ export function Timeline(props) {
             <ul id = "timeline-list">
                 {props.post.map((item) =>
                 <li key={item.id} className="post">
-                    <div className={item.type === "post" ? 'post-text': 'saved-message'}>
+                    <div className={item.type === "post" ? 'post-text': 'saved-message bubble'}>
                         {item.text}
                     </div>
                     <span className='timestamp'>{item.time}</span>
