@@ -9,17 +9,6 @@ export function Login(props) {
     const [userName, setUserName] = React.useState(props.userName);
     const [password, setPassword] = React.useState('');
     const navigate = useNavigate();
-    // async function loginUser() {
-    //     const user = new User(userName, password);
-    //     localStorage.setItem('user', JSON.stringify({
-    //         userName: user.username,
-    //         password: password
-    //     }))
-    //     localStorage.setItem('username', userName);
-    //     props.onAuthChange(user, AuthState.Authenticated);
-
-    // }
-
     async function loginUser() {
         loginOrCreate(`/api/auth/login`);
         navigate("/");
@@ -45,16 +34,6 @@ export function Login(props) {
 
         }
     }
-
-
-    // async function createUser() {
-    //     const user = new User(userName, password);
-    //     localStorage.setItem('username', userName)
-    //     props.onAuthChange('', AuthState.Authenticated)
-    //     props.onAuthChange(user, AuthState.Authenticated)
-
-    // }
-    
     
     
   return (

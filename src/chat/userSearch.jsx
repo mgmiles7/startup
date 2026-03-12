@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import './modal.css'
 export function Search({linked, changeLink, user, setUser, chatActive, setChatActive}){
-    const [show, setShow] = React.useState(true);
+    const [show, setShow] = React.useState(false);
     React.useEffect(() => {
         if (linked === false){
             setShow(true);
@@ -12,13 +12,6 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
         }
     }, [linked]);
     const handleClose = () => setShow(false);
-    // const users = React.useState([
-    //     //simulating a list of users that will be populate a database
-    //     { id: "user1", text: "Rebecca" },
-    //     { id: "user2", text: "John"},
-    //     { id: "user3", text: "Mary"},
-    //     { id: "user4", text: "Charlie"}
-    // ])
 
     const [userList, setUserList] = React.useState([]);
 
@@ -56,7 +49,7 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
 
     const [searchItem, setSearchItem] = React.useState('');
     const found = userList.some(
-        (item) => item === searchItem && searchItem !== ""
+        (item) => item === searchItem && searchItem !== "" && item !== user.username
     );
     return (
         <Modal size="sm" show = {show} onHide={() => handleClose()} centered backdrop="static" keyboard={false}>

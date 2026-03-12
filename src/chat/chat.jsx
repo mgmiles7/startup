@@ -16,18 +16,12 @@ export function Chat(props) {
         const hours = now.getHours() % 12 || 12;
         const minutes = now.getMinutes();
         const time = `${date} ${hours}:${minutes}`
-        //const id = now.getMilliseconds();
         const msg = {
             text: message,
             time: time,
             sender: sender
         }
         return msg;
-        // const mess = new Message(message, props.user.username, time, id)
-        // props.setUser(prev => ({
-        //     ...prev,
-        //     messages: [...prev.messages, mess]
-        // }))
     }
 
     function createPost(post, sender, type = 'post') {

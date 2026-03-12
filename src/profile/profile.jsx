@@ -8,11 +8,6 @@ export function Profile(props) {
   const [apiQuestion, setQuestion] = React.useState("");
   const [apiKicker, setApiKicker] = React.useState("")
   const navigate = useNavigate();
-  // function logoutOld(){
-  //   localStorage.removeItem('username');
-  //   props.onAuthChange(null, AuthState.Unauthenticated)
-  //   navigate("/");
-  // }
   const user = JSON.parse(localStorage.getItem('user'));
   function logout() {
     fetch('/api/auth/logout', {
