@@ -31,7 +31,7 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
     async function getUsers() {
         const response = await fetch('/api/auth/users', {
             method: 'get',
-        })
+        });
         let users =  await response.json();
         setUserList(users);
 
