@@ -83,6 +83,12 @@ h3, h2 {
   word-wrap: break-word;
 }
 
+.wrapper-button {
+    all: unset;
+    display: inline;
+    cursor: pointer;
+}
+
 .post-text {
     background-color: gainsboro;
     display: inline;

@@ -9,6 +9,7 @@ export function Chat(props) {
     const [message, setMessage] = React.useState([]);
     const [inputMessage, setInputMessage] = React.useState("")
     const user = JSON.parse(localStorage.getItem('user'));
+    
     function createMessage(message, sender) {
         const now = new Date()
         const date = now.toLocaleDateString();
@@ -29,6 +30,21 @@ export function Chat(props) {
         // }))
     }
 
+    function createPost(post, sender, type = 'post') {
+            const now = new Date()
+            const date = now.toLocaleDateString();
+            const hours = now.getHours() % 12 || 12;
+            const minutes = now.getMinutes();
+            const time = `${date} ${hours}:${minutes}`
+            const pst = {
+                text: post,
+                time: time,
+                sender: sender,
+                type: type
+            }
+            return pst;
+        }
+
     async function sendMessage(msg, sender){
         let mess = createMessage(msg, sender);
         const response = await fetch('/api/auth/sendMessage', {
@@ -39,7 +55,22 @@ export function Chat(props) {
             }
         });
         msg = await response.json();
+        if (sender === user.username) setInputMessage("");
         setMessage(prev => [...prev, msg]);
+        
+    }
+
+    async function timelineMessage(pst, sender){
+        let pt = createPost(pst, sender, "text");
+        const response = await fetch('/api/auth/sendPost', {
+            method: 'post',
+            body: JSON.stringify(pt),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        });
+        pst = await response.json();
+        props.setPost(prev => [...prev, pst]);
     }
 
     async function getMessages(){
@@ -47,8 +78,6 @@ export function Chat(props) {
             method: 'get',
         });
         const data = await response.json();
-        console.log("server returned:", data);
-        console.log("is array?", Array.isArray(data));
         setMessage(data);
     }
 
@@ -73,11 +102,14 @@ export function Chat(props) {
         <h3>{user.with}</h3>       
             <ul className = "messages">
                 {message.map((item) =>
+                
                 <li key={item.id} className= {(item.sender === user.username) 
                     ? "message-sent message" 
                     : "message-received message"}>
                     <div className='bubble'>
+                        <button className='wrapper-button' onClick={() => timelineMessage(item.text, user.username)}>
                         {item.text}
+                        </button>
                     </div>
                     <span className='timestamp'>{item.time}</span>
                 </li>)}
