@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthState } from '../login/authState';
 export function Profile(props) {
   const [showApi, setAPI] = React.useState(false);
+  const [apiQuestion, setQuestion] = React.useState("");
+  const [apiKicker, setApiKicker] = React.useState("")
   const navigate = useNavigate();
   // function logoutOld(){
   //   localStorage.removeItem('username');
@@ -26,6 +28,16 @@ export function Profile(props) {
       });
   }
 
+  async function getIdea(){
+    let jokeURL = 'https://official-joke-api.appspot.com/random_joke';
+    const response = await fetch(jokeURL);
+    const data = await response.json();
+    setAPI(true);
+    setQuestion(data.setup);
+    setApiKicker(data.punchline);
+  }
+
+
   function apiHandler() {
     setAPI(!showApi);
   }
@@ -36,13 +48,18 @@ export function Profile(props) {
             <h2 id = "user">{user.username}</h2>
             <p id = 'name'>{`Time with ${user.with}`}: 5 months</p>
             <div>
-            <button className="btn btn-primary send" onClick={() => apiHandler()}>Idea please!</button>
+            <button className="btn btn-primary send" onClick={() => getIdea()}>Joke please!</button>
             <button className="btn btn-outline-primary" onClick={() => logout()} >Log-out</button>
             </div>
             {showApi &&
+             <>
+             <div>
+                {apiQuestion}
+              </div>
               <div>
-                Try growing a bonsai tree!
-              </div>}
+                {apiKicker}
+                </div>
+                </>}
     </div>
   );
 }
