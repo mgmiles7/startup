@@ -9,16 +9,17 @@ export function Chat(props) {
     const [message, setMessage] = React.useState([]);
     const [inputMessage, setInputMessage] = React.useState("")
     const user = JSON.parse(localStorage.getItem('user'));
-    function createMessage(message) {
+    function createMessage(message, sender) {
         const now = new Date()
         const date = now.toLocaleDateString();
-        const hours = now.getHours() - 12;
+        const hours = now.getHours() % 12 || 12;
         const minutes = now.getMinutes();
         const time = `${date} ${hours}:${minutes}`
         //const id = now.getMilliseconds();
         const msg = {
             text: message,
             time: time,
+            sender: sender
         }
         return msg;
         // const mess = new Message(message, props.user.username, time, id)
@@ -28,8 +29,8 @@ export function Chat(props) {
         // }))
     }
 
-    async function sendMessage(msg){
-        let mess = createMessage(msg);
+    async function sendMessage(msg, sender){
+        let mess = createMessage(msg, sender);
         const response = await fetch('/api/auth/sendMessage', {
             method: 'post',
             body: JSON.stringify(mess),
@@ -60,10 +61,9 @@ export function Chat(props) {
 
 
     React.useEffect(() => {
-         if (!props.chatActive) return;
+        if (!props.chatActive) return;
         const id = setInterval(() => {
-            let filler = createMessage("Less annoying filler message");
-            setMessage(prev => [...prev, filler])
+            sendMessage("Less annoying filler message", user.with)
         },8000);
         return () => clearInterval(id);
     }, [props.chatActive])
@@ -101,7 +101,7 @@ export function Chat(props) {
                 <input type="text" className="form-control" placeholder="message" value={inputMessage} onChange={(e) => setInputMessage(e.target.value)}/>
                 </div>
                 <div>
-                <button id = 'send' className="btn btn-primary send" onClick={() => sendMessage(inputMessage)}>Send</button>
+                <button id = 'send' className="btn btn-primary send" onClick={() => sendMessage(inputMessage, user.username)}>Send</button>
                 </div>
                 </div>
             </div>

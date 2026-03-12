@@ -11,7 +11,7 @@ export function Profile(props) {
   //   props.onAuthChange(null, AuthState.Unauthenticated)
   //   navigate("/");
   // }
-
+  const user = JSON.parse(localStorage.getItem('user'));
   function logout() {
     fetch('/api/auth/logout', {
       method: 'delete',
@@ -33,8 +33,8 @@ export function Profile(props) {
   return (
     <div className="main">
       <img src="../logo.png" alt="Us logo"/>
-            <h2 id = "user">{props.user.username}</h2>
-            <p id = 'name'>{`Time with ${props.user.with}`}: 5 months</p>
+            <h2 id = "user">{user.username}</h2>
+            <p id = 'name'>{`Time with ${user.with}`}: 5 months</p>
             <div>
             <button className="btn btn-primary send" onClick={() => apiHandler()}>Idea please!</button>
             <button className="btn btn-outline-primary" onClick={() => logout()} >Log-out</button>

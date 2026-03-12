@@ -69,11 +69,8 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 //update user
 apiRouter.post('/auth/update', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    user = {
-        username: user.username,
-        linked: req.body.linked,
-        with: req.body.with
-    }
+    user.linked = req.body.linked;
+    user.with = req.body.with;
     res.send({ 
             username: user.username,
             linked: user.linked,
@@ -91,14 +88,15 @@ const user = await findUser('token', req.cookies[authCookieName]);
     const message = {
         text: req.body.text,
         time: req.body.time,
-        sender: user.username,
+        sender: req.body.sender,
         id: uuid.v4(),
     }
 
     const senderMessages = messages.get(user.username);
     const receiverMessages = messages.get(user.with);
 
-    senderMessag
+    senderMessages.push(message);
+    receiverMessages.push(message)
     console.log(message)
     res.json(message);
 
