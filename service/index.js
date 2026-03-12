@@ -9,6 +9,7 @@ const authCookieName = 'token';
 let users = [];
 let usernames = [];
 let messages = new Map();
+let posts = new Map();
 
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -110,6 +111,33 @@ apiRouter.get('/auth/getMessages', async (req, res) => {
     res.json(userMessages);
 })
 
+// send post
+apiRouter.post('/auth/sendPost', async (req, res) =>{
+const user = await findUser('token', req.cookies[authCookieName]);
+    const post = {
+        text: req.body.text,
+        time: req.body.time,
+        sender: req.body.sender,
+        type: req.body.type,
+        id: uuid.v4(),
+    }
+
+    const senderPosts = posts.get(user.username);
+    const receiverPosts = posts.get(user.with);
+
+    senderPosts.push(post);
+    receiverPosts.push(post)
+    res.json(post);
+
+})
+
+//get messages
+apiRouter.get('/auth/getPosts', async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    const userPosts = posts.get(user.username) || [];
+    res.json(userPosts);
+})
+
 //verification check
 const verifyAuth = async (req, res, next) => {
   const user = await findUser('token', req.cookies[authCookieName]);
@@ -135,6 +163,7 @@ async function createUser(username, password) {
   users.push(user);
   usernames.push(user.username);
   messages.set(user.username, []);
+  posts.set(user.username, [])
 
   return user;
 }
