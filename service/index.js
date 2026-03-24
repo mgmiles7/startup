@@ -97,12 +97,13 @@ const user = await findUser('token', req.cookies[authCookieName]);
         id: uuid.v4(),
     }
 
-    const senderMessages = messages.get(user.username);
-    const receiverMessages = messages.get(user.with);
+    // const senderMessages = messages.get(user.username);
+    // const receiverMessages = messages.get(user.with);
 
-    senderMessages.push(message);
-    receiverMessages.push(message)
-    console.log(message)
+    // senderMessages.push(message);
+    // receiverMessages.push(message)
+    // console.log(message)
+    message = await DB.newMessage(message);
     res.json(message);
 
 })
@@ -110,13 +111,14 @@ const user = await findUser('token', req.cookies[authCookieName]);
 //get messages
 apiRouter.get('/auth/getMessages', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    const userMessages = messages.get(user.username) || [];
+    //const userMessages = messages.get(user.username) || [];
+    const userMessages = await DB.getMessages(user)
     console.log(userMessages)
     res.json(userMessages);
 })
 
 // send post
-apiRouter.post('/auth/sendPost', async (req, res) =>{
+apiRouter.post('/auth/sendPost', async (req, res) => {
 const user = await findUser('token', req.cookies[authCookieName]);
     const post = {
         text: req.body.text,
@@ -126,19 +128,21 @@ const user = await findUser('token', req.cookies[authCookieName]);
         id: uuid.v4(),
     }
 
-    const senderPosts = posts.get(user.username);
-    const receiverPosts = posts.get(user.with);
+    // const senderPosts = posts.get(user.username);
+    // const receiverPosts = posts.get(user.with);
 
-    senderPosts.push(post);
-    receiverPosts.push(post)
+    // senderPosts.push(post);
+    // receiverPosts.push(post)
+    post = await DB.newPost(post);
     res.json(post);
 
 })
 
-//get messages
+//get posts
 apiRouter.get('/auth/getPosts', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    const userPosts = posts.get(user.username) || [];
+    //const userPosts = posts.get(user.username) || [];
+    const userPosts = await DB.getPosts(user)
     res.json(userPosts);
 })
 

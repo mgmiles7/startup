@@ -45,5 +45,25 @@ function getUserNames(){
 
 }
 
+async function newMessage(message){
+    await messageCollection.insertOne(message);
+}
+
+function getMessages(user){
+    let messages = messageCollection.find({sender: { $in: [user.username, user.with]}}, {sort : {time: 1}}).toArray();
+    return messages;
+}
+
+async function newPost(post){
+    await postCollection.insertOne(post);
+}
+
+function getPosts(user){
+    let posts = postCollection.find({sender: {$in: [user.username, user.with]}}, {sort: {time: 1}}).toArray();
+    return posts;
+}
+
+
+
 
 
