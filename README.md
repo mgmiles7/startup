@@ -103,12 +103,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
+- [X] **Node.js/Express HTTP service** - Configure app with these packages
+- [X] **Static middleware for frontend** - Used the JSON middleware as well as middleware to provide authentication and serve the frontend files
+- [X] **Calls to third party endpoints** - Unfortuneately boredAPI wasn't responding well to my requests so I threw in a call to JokeAPI on the profile page
+- [X] **Backend service endpoints** - Made endpoints for creating users, logging in, editing users, sending and loading messages as well as posts.
+- [X] **Frontend calls service endpoints** - Added calls to those backend endpoints in my login, chat, timeline, and profile pages. Also added functionality to save messages to the timeline
+- [X] **Supports registration, login, logout, and restricted endpoint** - Uses cookies and unique ids to support registration, login, and logout. Use those cookies for restricted endpoints throughout the app. Also supports `bcrypt` hashing for passwords.
 
 ## 🚀 DB deliverable
 
