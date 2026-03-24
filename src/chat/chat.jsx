@@ -83,13 +83,13 @@ export function Chat(props) {
 
 
 
-    React.useEffect(() => {
-        if (!props.chatActive) return;
-        const id = setInterval(() => {
-            sendMessage("Less annoying filler message", user.with)
-        },8000);
-        return () => clearInterval(id);
-    }, [props.chatActive])
+    // React.useEffect(() => {
+    //     if (!props.chatActive) return;
+    //     const id = setInterval(() => {
+    //         sendMessage("Less annoying filler message", user.with)
+    //     },8000);
+    //     return () => clearInterval(id);
+    // }, [props.chatActive])
   return (
     <>
     <div className='main chat'>

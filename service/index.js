@@ -13,7 +13,7 @@ let messages = new Map();
 let posts = new Map();
 
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -103,7 +103,7 @@ const user = await findUser('token', req.cookies[authCookieName]);
     // senderMessages.push(message);
     // receiverMessages.push(message)
     // console.log(message)
-    message = await DB.newMessage(message);
+    let sent = await DB.newMessage(message);
     res.json(message);
 
 })
@@ -133,7 +133,7 @@ const user = await findUser('token', req.cookies[authCookieName]);
 
     // senderPosts.push(post);
     // receiverPosts.push(post)
-    post = await DB.newPost(post);
+    let posted = await DB.newPost(post);
     res.json(post);
 
 })
