@@ -10,6 +10,7 @@ export function Chat(props) {
     const [message, setMessage] = React.useState([]);
     const [inputMessage, setInputMessage] = React.useState("")
     const user = JSON.parse(localStorage.getItem('user'));
+    const [shouldScroll, setScroll] = React.useState(false);
     const bottomRef = useRef(null);
     
     function createMessage(message, sender) {
@@ -30,7 +31,6 @@ export function Chat(props) {
             const now = new Date()
             const date = now.toLocaleDateString();
             const hours = now.getHours() % 12 || 12;
-            const minutes = now.getMinutes();
             const time = `${date} ${hours}:${minutes}`
             const pst = {
                 text: post,
@@ -53,6 +53,7 @@ export function Chat(props) {
         msg = await response.json();
         if (sender === user.username) setInputMessage("");
         setMessage(prev => [...prev, msg]);
+        setScroll(true);
         
     }
 
@@ -78,7 +79,10 @@ export function Chat(props) {
     }
 
     React.useEffect(() =>{
-        bottomRef.current?.scrollIntoView({behavior:"smooth"});
+        if (shouldScroll){
+            bottomRef.current?.scrollIntoView({behavior:"smooth"});
+            setScroll(false);
+        }
     }, [message])
 
     React.useEffect(() => {
@@ -100,7 +104,7 @@ export function Chat(props) {
     <>
     <div className='main chat'>
         <h3>{user.with}</h3>       
-            <ul className = "messages">
+            <ul className = "messages hide-scrollbar">
                 {message.map((item) =>
                 
                 <li key={item.id} className= {(item.sender === user.username) 
