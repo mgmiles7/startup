@@ -21,7 +21,12 @@ export default function App() {
     })
     const currentAuthState = user ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
-    const [linked, changeLink] = React.useState(false);
+    const [linked, changeLink] = React.useState(() => {
+        if (!user){
+            return false;
+        }
+        return user.linked;
+    });
     const [chatActive, setChatActive] = React.useState(false);
     
     const [post, setPost] = React.useState([]);
