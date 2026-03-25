@@ -10,7 +10,7 @@ export function Search({linked, changeLink, user, setUser, chatActive, setChatAc
         } else {
             setShow(false);
         }
-    }, [linked]);
+    }, []);
     const handleClose = () => setShow(false);
 
     const [userList, setUserList] = React.useState([]);
