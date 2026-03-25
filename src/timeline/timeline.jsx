@@ -10,7 +10,7 @@ export function Timeline(props) {
         const now = new Date()
         const date = now.toLocaleDateString();
         const hours = now.getHours() % 12 || 12;
-        const minutes = now.getMinutes();
+        const minutes = (now.getMinutes() < 10) ? "0"+now.getMinutes(): now.getMinutes();
         const time = `${date} ${hours}:${minutes}`
         const pst = {
             text: post,
