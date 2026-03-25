@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal } from "react-bootstrap";
 import { Search } from './userSearch';
 import { Message } from '../messages';
+import { useRef } from 'react';
 export function Chat(props) {
     React.useEffect(() => {
     console.log("Chat mounted");
@@ -9,6 +10,7 @@ export function Chat(props) {
     const [message, setMessage] = React.useState([]);
     const [inputMessage, setInputMessage] = React.useState("")
     const user = JSON.parse(localStorage.getItem('user'));
+    const bottomRef = useRef(null);
     
     function createMessage(message, sender) {
         const now = new Date()
@@ -75,6 +77,10 @@ export function Chat(props) {
         setMessage(data);
     }
 
+    React.useEffect(() =>{
+        bottomRef.current?.scrollIntoView({behavior:"smooth"});
+    }, [message])
+
     React.useEffect(() => {
         getMessages();
         const interval = setInterval(getMessages, 3000);
@@ -119,6 +125,7 @@ export function Chat(props) {
                     </div>
                     <span className="timestamp"> 1:10 AM</span>
                  */}
+            <div ref = {bottomRef}/>     
             </ul>
             <div>
             <div className='composer'>
