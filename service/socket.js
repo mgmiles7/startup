@@ -12,9 +12,19 @@ function messageProxy(httpServer) {
   });
 
   let connections = new Map();
+  let users = new Map();
 
-  wss.on('connection', (ws) => {
+  wss.on('connection', (socket) => {
     socket.isAlive = true;
+    socket.id = uuid.v4();
+    connections.set(socket.id, ws);
+
+    wss.on('message', function message(data) {
+        if (data.type === "join"){
+            users.set(data.username, new Set());
+            users.get(data.username).add(socket);
+        } 
+    }
 
 
 

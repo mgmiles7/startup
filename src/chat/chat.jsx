@@ -17,8 +17,13 @@ export function Chat(props) {
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
         socket.onopen = () => {
+            let userSocket = user;
+            userSocket.type = "join"
             socket.send(JSON.stringify(user));
         };
+        
+        }
+        
     };
     
     function createMessage(message, sender) {
