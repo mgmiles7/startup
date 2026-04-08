@@ -8,10 +8,18 @@ export function Chat(props) {
     console.log("Chat mounted");
     }, []);
     const [message, setMessage] = React.useState([]);
-    const [inputMessage, setInputMessage] = React.useState("")
+    const [inputMessage, setInputMessage] = React.useState("");
     const user = JSON.parse(localStorage.getItem('user'));
     const [shouldScroll, setScroll] = React.useState(false);
     const bottomRef = useRef(null);
+
+    function makeSocket(){
+        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+        socket.onopen = () => {
+            socket.send(JSON.stringify(user));
+        };
+    };
     
     function createMessage(message, sender) {
         const now = new Date()
