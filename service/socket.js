@@ -17,25 +17,31 @@ function messageProxy(httpServer) {
   wss.on('connection', (socket) => {
     socket.isAlive = true;
     socket.id = uuid.v4();
-    connections.set(socket.id, ws);
+    connections.set(socket.id, socket);
 
     wss.on('message', function message(data) {
-        if (data.type === "join"){
-            users.set(data.username, new Set());
-            users.get(data.username).add(socket);
-        } 
-    }
-
-
-
-    // Forward messages to everyone except the sender
-    socket.on('message', function message(data) {
-      socketServer.clients.forEach((client) => {
-        if (client !== socket && client.readyState === WebSocket.OPEN) {
-          client.send(data);
+        const text = JSON.parse(data);
+        if (text.type === "join"){
+          if (users.has(text.value.username)){
+            users.get(text.value.username).add(socket);
+          } else {
+            users.set(text.value.username, new Set());
+            users.get(text.value.username).add(socket);
+          }
+          let recipient = users.get(text.value.with);
+          recipient.forEach((r) => r.send(data));
+        }
+        if (text.type == "disconnect"){
+          connections.delete(socket);
+          users.get(text.value.username).delete(socket);
+          let recipient = users.get(text.value.with);
+          recipient.forEach((r) => r.send(data));
+        }
+        else {
+          let recipient = users.get(text.value.with);
+          recipient.forEach((r) => r.send(data));
         }
       });
-    });
 
     // Respond to pong messages by marking the connection alive
     socket.on('pong', () => {
@@ -45,7 +51,7 @@ function messageProxy(httpServer) {
 
   // Periodically send out a ping message to make sure clients are alive
   setInterval(() => {
-    socketServer.clients.forEach(function each(client) {
+    socketServer.connections.forEach(function each(client) {
       if (client.isAlive === false) return client.terminate();
 
       client.isAlive = false;
