@@ -19,7 +19,7 @@ function messageProxy(httpServer) {
     socket.id = uuid.v4();
     connections.set(socket.id, socket);
 
-    wss.on('message', function message(data) {
+    socket.on('message', function message(data) {
         const text = JSON.parse(data);
         if (text.type === "join"){
           if (users.has(text.value.username)){
@@ -28,20 +28,26 @@ function messageProxy(httpServer) {
             users.set(text.value.username, new Set());
             users.get(text.value.username).add(socket);
           }
-          let recipient = users.get(text.value.with);
-          recipient.forEach((r) => r.send(data));
+          
         }
-        if (text.type == "disconnect"){
-          connections.delete(socket);
-          users.get(text.value.username).delete(socket);
-          let recipient = users.get(text.value.with);
-          recipient.forEach((r) => r.send(data));
-        }
-        else {
-          let recipient = users.get(text.value.with);
-          recipient.forEach((r) => r.send(data));
-        }
+        let recipient = users.get(text.value.with);
+        recipient.forEach((r) => r.send(data));
       });
+    socket.on('close', () => {
+      
+      connections.delete(socket.id);
+      for (let [username, set] of users) {
+        set.delete(socket);
+        if (set.size === 0){
+          users.delete(username);
+          const message = JSON.stringify({
+            type: 'disconnet',
+            value: { username } 
+          })
+          recipient.forEach((r) => r.send(message));
+        }
+      }
+    });
 
     // Respond to pong messages by marking the connection alive
     socket.on('pong', () => {
@@ -51,7 +57,7 @@ function messageProxy(httpServer) {
 
   // Periodically send out a ping message to make sure clients are alive
   setInterval(() => {
-    socketServer.connections.forEach(function each(client) {
+    connections.forEach(function each(client) {
       if (client.isAlive === false) return client.terminate();
 
       client.isAlive = false;

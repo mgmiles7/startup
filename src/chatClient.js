@@ -24,32 +24,21 @@ class ChatClient {
             this.socket.send(JSON.stringify(message));
         }
         this.socket.onmessage = async (event) => {
-            const raw = await event.data.text();
-            const text = JSON.parse(raw);
-            if (text.type === 'message'){
-                this.notifyMessage(text.value);
-            } else if (text.type === 'post'){
-                this.notifyPost(text.value);
-            } else if (text.type === 'disconnect'){
-                this.partnerConnected = false;
-            } else if (text.type === 'connect'){
-                this.partnerConnected = true;
-            }  
+            const text = JSON.parse(event.data);
+            this.notifyObservers(text);
         };
 
         this.socket.onclose = (event) => {
-            this.connected = false;
-            let message = new socketMessage('disconnect', this.userSocket)
-            this.socket.send(JSON.stringify(message));
+            this.Alive = false;
         };     
     }
     
     sendMessage(message){
         this.socket.send(JSON.stringify(message));
         if (message.type === 'message'){
-                this.notifyMessage(text.value);
+                this.notifyObservers(message);
             } else if (message.type === 'post'){
-                this.notifyPost(text.value);
+                this.notifyObservers(message);
             } else if (message.type === 'disconnect'){
                 this.Alive = false;
             } else if (message.type === 'connect'){
@@ -57,9 +46,6 @@ class ChatClient {
             }
     }
 
-    returnMessage(text){
-        return text
-    }
 
     addObserverM(observer){
         this.observersM.push(observer);
@@ -70,7 +56,7 @@ class ChatClient {
     }
 
     addObserverP(observer){
-        this.observersP(observer);
+        this.observersP.push(observer);
     }
 
     notifyObservers(message){
@@ -82,5 +68,5 @@ class ChatClient {
     }
 }
 
-const ChatClient = new ChatClient();
+
 export { socketMessage, ChatClient};

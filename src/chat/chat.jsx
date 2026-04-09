@@ -13,7 +13,7 @@ export function Chat(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     const [shouldScroll, setScroll] = React.useState(false);
     const bottomRef = useRef(null);
-
+    const client = new ChatClient(user);
     
     function createMessage(message, sender) {
         const now = new Date()
@@ -46,9 +46,9 @@ export function Chat(props) {
 
     async function sendMessage(msg, sender){
         let mess = createMessage(msg, sender);
-        if (ChatClient.Alive === true){
+        if (client.Alive === true){
             let sockM = new socketMessage('message', mess);
-            ChatClient.sendMessage(sockM);
+            client.sendMessage(sockM);
         } 
         const response = await fetch('/api/auth/sendMessage', {
             method: 'post',
@@ -92,9 +92,9 @@ export function Chat(props) {
     }
 
     React.useEffect(() => {
-        ChatClient.addObserveM(socketMessage);
+        client.addObserverM(socketMessage);
         return () => {
-            ChatClient.removeObserverM(socketMessage);
+            client.removeObserverM(socketMessage);
         }
     }, []);
 
