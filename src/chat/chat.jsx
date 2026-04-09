@@ -3,6 +3,7 @@ import { Modal } from "react-bootstrap";
 import { Search } from './userSearch';
 import { Message } from '../messages';
 import { useRef } from 'react';
+import { ChatClient, socketMessage } from '../chatClient';
 export function Chat(props) {
     React.useEffect(() => {
     console.log("Chat mounted");
@@ -13,18 +14,6 @@ export function Chat(props) {
     const [shouldScroll, setScroll] = React.useState(false);
     const bottomRef = useRef(null);
 
-    function makeSocket(){
-        const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-        const socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
-        socket.onopen = () => {
-            let userSocket = user;
-            userSocket.type = "join"
-            socket.send(JSON.stringify(user));
-        };
-        
-        }
-        
-    };
     
     function createMessage(message, sender) {
         const now = new Date()
@@ -57,6 +46,10 @@ export function Chat(props) {
 
     async function sendMessage(msg, sender){
         let mess = createMessage(msg, sender);
+        if (ChatClient.Alive === true){
+            let sockM = new socketMessage('message', mess);
+            ChatClient.sendMessage(sockM);
+        } 
         const response = await fetch('/api/auth/sendMessage', {
             method: 'post',
             body: JSON.stringify(mess),
@@ -64,9 +57,11 @@ export function Chat(props) {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
-        msg = await response.json();
-        if (sender === user.username) setInputMessage("");
-        setMessage(prev => [...prev, msg]);
+        if (ChatClient.Alive === false){
+            msg = await response.json();
+            if (sender === user.username) setInputMessage("");
+            setMessage(prev => [...prev, msg]);    
+        }    
         setScroll(true);
         
     }
@@ -91,6 +86,17 @@ export function Chat(props) {
         const data = await response.json();
         setMessage(data);
     }
+
+    function socketMessage(message){
+        setMessage(prev => [...prev, message])
+    }
+
+    React.useEffect(() => {
+        ChatClient.addObserveM(socketMessage);
+        return () => {
+            ChatClient.removeObserverM(socketMessage);
+        }
+    }, []);
 
     React.useEffect(() =>{
         if (shouldScroll){
