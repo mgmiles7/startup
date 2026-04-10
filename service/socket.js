@@ -13,6 +13,7 @@ function messageProxy(httpServer) {
 
   let connections = new Map();
   let users = new Map();
+  let socketToUser = new Map();
 
   wss.on('connection', (socket) => {
     socket.isAlive = true;
@@ -26,26 +27,10 @@ function messageProxy(httpServer) {
         console.log(text.type);
         console.log(text);
         if (text.type === "join"){
-          if (users.has(text.value.username)){
-            users.get(text.value.username).add(socket);
-            socket.with = text.value.with;
-            socket.username = text.value.username
-          } else {
-            socket.username = text.value.username
-            users.set(text.value.username, new Set());
-            users.get(text.value.username).add(socket);
-            socket.with = text.value.with;
-          }
-          
+            handleJoin(socket, text);
+        } else if (TextDecoderStream.type === "message"){
+          handleMessage(socket, text);
         }
-        users.forEach((value,key) => { 
-          console.log(key);
-        })
-        let recipient = users.get(socket.with);
-        if (recipient){
-          recipient.forEach((r) => r.send(text));
-        }
-        socket.send(JSON.stringify(text))
       });
     socket.on('close', () => {
       let recipient = users.get(socket.with);
@@ -81,6 +66,22 @@ function messageProxy(httpServer) {
       client.ping();
     });
   }, 10000);
+}
+
+function handleJoin(socket, msg){
+  const { from } = msg;
+
+  socketToUser.set(socket, from);
+
+  if (!users.has(from)){
+    users.set(from, new Set());
+  }
+
+  users.get(from).add(socket);
+}
+
+function handleMessage(socket, msg){
+  const 
 }
 
 module.exports = { messageProxy };
