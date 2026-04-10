@@ -54,9 +54,9 @@ class ChatClient {
 
     notifyObservers(message){
         if (message.type === 'message'){
-            this.observersM.forEach((h) => h(message));
+            this.observersM.forEach((h) => h(message.payload));
         } else if (message.type === 'post'){
-            this.observersP.forEach((h) => h(message));
+            this.observersP.forEach((h) => h(message.payload));
         }
     }
 }

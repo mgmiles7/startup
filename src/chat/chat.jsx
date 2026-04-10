@@ -62,6 +62,7 @@ export function Chat(props) {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
+        const dbresponse = await response.json();
         setInputMessage("");  
         setScroll(true);
         
@@ -89,7 +90,7 @@ export function Chat(props) {
     }
 
     function handleSocketMessage(message){
-        setMessage(prev => [...prev, message.value])
+        setMessage(prev => [...prev, message])
     }
 
     React.useEffect(() => {
@@ -129,7 +130,7 @@ export function Chat(props) {
             <ul className = "messages hide-scrollbar">
                 {message.map((item) =>
                 
-                <li key={item.id} className= {(item.sender === user.username) 
+                <li key={item.time} className= {(item.sender === user.username) 
                     ? "message-sent message" 
                     : "message-received message"}>
                     <div className='bubble'>
