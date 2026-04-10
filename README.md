@@ -121,8 +121,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - Backend routes messages from websockets
+- [x] **Frontend makes WebSocket connection** - Front end class that handles making the websocket.
+- [x] **Data sent over WebSocket connection** - Messages sent over websockets
+- [x] **WebSocket data displayed** - Messages displayed on both sides of the chat
+- [ ] **Application is fully functional** - For some reason the messages sent over websocket don't stay in the chat after a refresh even though they're added to the database
