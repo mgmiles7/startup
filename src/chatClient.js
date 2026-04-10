@@ -1,7 +1,9 @@
 
 class socketMessage {
-    constructor(type, value){
+    constructor(type, from, to, value){
         this.type = type;
+        this.from = from;
+        this.to = to
         this.value = value;
     }
 }
