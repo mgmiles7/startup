@@ -18,33 +18,50 @@ function messageProxy(httpServer) {
     socket.isAlive = true;
     socket.id = uuid.v4();
     connections.set(socket.id, socket);
+    socket.with = null;
+    socket.username = null;
 
     socket.on('message', function message(data) {
-        const text = JSON.parse(data);
+        const text = JSON.parse(data.toString());
+        console.log(text.type);
+        console.log(text);
         if (text.type === "join"){
           if (users.has(text.value.username)){
             users.get(text.value.username).add(socket);
+            socket.with = text.value.with;
+            socket.username = text.value.username
           } else {
+            socket.username = text.value.username
             users.set(text.value.username, new Set());
             users.get(text.value.username).add(socket);
+            socket.with = text.value.with;
           }
           
         }
-        let recipient = users.get(text.value.with);
-        recipient.forEach((r) => r.send(data));
+        users.forEach((value,key) => { 
+          console.log(key);
+        })
+        let recipient = users.get(socket.with);
+        if (recipient){
+          recipient.forEach((r) => r.send(text));
+        }
+        socket.send(JSON.stringify(text))
       });
     socket.on('close', () => {
-      
+      let recipient = users.get(socket.with);
+      const message = JSON.stringify({
+            type: 'disconnect',
+            value: { username: socket.username } 
+          })
+      if (recipient){
+      recipient.forEach((r) => r.send(message));
+      }
       connections.delete(socket.id);
       for (let [username, set] of users) {
         set.delete(socket);
         if (set.size === 0){
           users.delete(username);
-          const message = JSON.stringify({
-            type: 'disconnet',
-            value: { username } 
-          })
-          recipient.forEach((r) => r.send(message));
+          
         }
       }
     });
@@ -66,4 +83,4 @@ function messageProxy(httpServer) {
   }, 10000);
 }
 
-module.exports = { peerProxy };
+module.exports = { messageProxy };

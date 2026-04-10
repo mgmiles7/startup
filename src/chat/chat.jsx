@@ -13,13 +13,19 @@ export function Chat(props) {
     const user = JSON.parse(localStorage.getItem('user'));
     const [shouldScroll, setScroll] = React.useState(false);
     const bottomRef = useRef(null);
-    const client = new ChatClient(user);
+    const clientRef = React.useRef(null);
+
+    if (!clientRef.current) {
+        clientRef.current = new ChatClient(user);
+    }
+
+    const client = clientRef.current;
     
     function createMessage(message, sender) {
         const now = new Date()
         const date = now.toLocaleDateString();
         const hours = now.getHours() % 12 || 12;
-        const minutes = now.getMinutes();
+        const minutes = (now.getMinutes() < 10) ? "0"+now.getMinutes(): now.getMinutes();
         const time = `${date} ${hours}:${minutes}`
         const msg = {
             text: message,
@@ -46,7 +52,7 @@ export function Chat(props) {
 
     async function sendMessage(msg, sender){
         let mess = createMessage(msg, sender);
-        if (client.Alive === true){
+        if (client.partnerConnected === true){
             let sockM = new socketMessage('message', mess);
             client.sendMessage(sockM);
         } 
@@ -57,7 +63,7 @@ export function Chat(props) {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
-        if (ChatClient.Alive === false){
+        if (client.partnerConnected === false){
             msg = await response.json();
             if (sender === user.username) setInputMessage("");
             setMessage(prev => [...prev, msg]);    
@@ -87,14 +93,15 @@ export function Chat(props) {
         setMessage(data);
     }
 
-    function socketMessage(message){
-        setMessage(prev => [...prev, message])
+    function handleSocketMessage(message){
+        setMessage(prev => [...prev, message.value])
     }
 
     React.useEffect(() => {
-        client.addObserverM(socketMessage);
+        client.addObserverM(handleSocketMessage);
+        getMessages()
         return () => {
-            client.removeObserverM(socketMessage);
+            client.removeObserverM(handleSocketMessage);
         }
     }, []);
 
@@ -105,11 +112,11 @@ export function Chat(props) {
         }
     }, [message])
 
-    React.useEffect(() => {
-        getMessages();
-        const interval = setInterval(getMessages, 3000);
-        return () => clearInterval(interval)
-    }, []);
+    // React.useEffect(() => {
+    //     getMessages();
+    //     const interval = setInterval(getMessages, 3000);
+    //     return () => clearInterval(interval)
+    // }, []);
 
 
 

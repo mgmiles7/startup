@@ -20,11 +20,18 @@ class ChatClient {
         this.socket.onopen = (event) => {
             this.userSocket = user;
             this.Alive = true
-            let message = new socketMessage('connect', this.userSocket);
+            let message = new socketMessage('join', this.userSocket);
             this.socket.send(JSON.stringify(message));
         }
         this.socket.onmessage = async (event) => {
             const text = JSON.parse(event.data);
+            if (text.type === 'join' && text.value.username === user.with){
+                this.partnerConnected = true;
+            }
+            if (text.type === 'disconnect' && text.value.username === user.with){
+                this.partnerConnected = false;
+            }
+            console.log(text.type);
             this.notifyObservers(text);
         };
 
@@ -35,15 +42,6 @@ class ChatClient {
     
     sendMessage(message){
         this.socket.send(JSON.stringify(message));
-        if (message.type === 'message'){
-                this.notifyObservers(message);
-            } else if (message.type === 'post'){
-                this.notifyObservers(message);
-            } else if (message.type === 'disconnect'){
-                this.Alive = false;
-            } else if (message.type === 'connect'){
-                this.Alive = true;
-            }
     }
 
 
@@ -52,7 +50,7 @@ class ChatClient {
     }
 
     removeObserverM(observer){
-        this.observersM.filter((m) => m !== observer);
+        this.observersM = this.observersM.filter((m) => m !== observer);
     }
 
     addObserverP(observer){
