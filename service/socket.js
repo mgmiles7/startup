@@ -33,6 +33,19 @@ function messageProxy(httpServer) {
         }
       });
     socket.on('close', () => {
+      const username = socketToUser.get(socket);
+      if (!username) return;
+
+      const set = users.get(username);
+
+      if (set) {
+        set.delete(socket);
+          if (set.size === 0) {
+            users.delete(username);
+          }
+      }
+      socketToUser.delete(socket);
+
       let recipient = users.get(socket.with);
       const message = JSON.stringify({
             type: 'disconnect',
@@ -81,7 +94,21 @@ function handleJoin(socket, msg){
 }
 
 function handleMessage(socket, msg){
-  const 
+  const { from, to, payload} = msg;
+
+  if (!users.has(to)) {
+    return;
+  }
+
+  const recipients = users.get(to);
+
+  recipients.forEach((r) => {
+    r.send(JSON.stringify({
+      type: "message",
+      from,
+      payload
+    }));
+  });
 }
 
 module.exports = { messageProxy };
