@@ -52,10 +52,9 @@ export function Chat(props) {
 
     async function sendMessage(msg, sender){
         let mess = createMessage(msg, sender);
-        if (client.partnerConnected === true){
-            let sockM = new socketMessage('message', mess);
+            let sockM = new socketMessage('message', user.username, user.with, mess);
             client.sendMessage(sockM);
-        } 
+
         const response = await fetch('/api/auth/sendMessage', {
             method: 'post',
             body: JSON.stringify(mess),
@@ -63,11 +62,7 @@ export function Chat(props) {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         });
-        if (client.partnerConnected === false){
-            msg = await response.json();
-            if (sender === user.username) setInputMessage("");
-            setMessage(prev => [...prev, msg]);    
-        }    
+        setInputMessage("");  
         setScroll(true);
         
     }

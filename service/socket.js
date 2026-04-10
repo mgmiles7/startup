@@ -28,7 +28,7 @@ function messageProxy(httpServer) {
         console.log(text);
         if (text.type === "join"){
             handleJoin(socket, text);
-        } else if (TextDecoderStream.type === "message"){
+        } else if (text.type === "message"){
           handleMessage(socket, text);
         }
       });
@@ -45,23 +45,6 @@ function messageProxy(httpServer) {
           }
       }
       socketToUser.delete(socket);
-
-      let recipient = users.get(socket.with);
-      const message = JSON.stringify({
-            type: 'disconnect',
-            value: { username: socket.username } 
-          })
-      if (recipient){
-      recipient.forEach((r) => r.send(message));
-      }
-      connections.delete(socket.id);
-      for (let [username, set] of users) {
-        set.delete(socket);
-        if (set.size === 0){
-          users.delete(username);
-          
-        }
-      }
     });
 
     // Respond to pong messages by marking the connection alive
@@ -79,9 +62,8 @@ function messageProxy(httpServer) {
       client.ping();
     });
   }, 10000);
-}
 
-function handleJoin(socket, msg){
+  function handleJoin(socket, msg){
   const { from } = msg;
 
   socketToUser.set(socket, from);
@@ -93,22 +75,24 @@ function handleJoin(socket, msg){
   users.get(from).add(socket);
 }
 
-function handleMessage(socket, msg){
-  const { from, to, payload} = msg;
+  function handleMessage(socket, msg){
+    const { from, to, payload} = msg;
 
-  if (!users.has(to)) {
-    return;
+    if (!users.has(to)) {
+      return;
+    }
+
+    const recipients = users.get(to);
+
+    recipients.forEach((r) => {
+      r.send(JSON.stringify({
+        type: "message",
+        from,
+        to,
+        payload
+      }));
+    });
   }
-
-  const recipients = users.get(to);
-
-  recipients.forEach((r) => {
-    r.send(JSON.stringify({
-      type: "message",
-      from,
-      payload
-    }));
-  });
 }
 
 module.exports = { messageProxy };

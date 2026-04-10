@@ -4,7 +4,7 @@ class socketMessage {
         this.type = type;
         this.from = from;
         this.to = to
-        this.value = value;
+        this.payload = value;
     }
 }
 
@@ -13,7 +13,6 @@ class ChatClient {
     observersP = []
     Alive = false;
     userSocket = null;
-    partnerConnected = false;
 
     constructor(user){
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
@@ -22,18 +21,11 @@ class ChatClient {
         this.socket.onopen = (event) => {
             this.userSocket = user;
             this.Alive = true
-            let message = new socketMessage('join', this.userSocket);
+            let message = new socketMessage('join', this.userSocket.username, this.userSocket.with, "defaultJoin");
             this.socket.send(JSON.stringify(message));
         }
         this.socket.onmessage = async (event) => {
             const text = JSON.parse(event.data);
-            if (text.type === 'join' && text.value.username === user.with){
-                this.partnerConnected = true;
-            }
-            if (text.type === 'disconnect' && text.value.username === user.with){
-                this.partnerConnected = false;
-            }
-            console.log(text.type);
             this.notifyObservers(text);
         };
 
@@ -44,6 +36,7 @@ class ChatClient {
     
     sendMessage(message){
         this.socket.send(JSON.stringify(message));
+        this.notifyObservers(message);
     }
 
 
